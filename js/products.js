@@ -1,13 +1,10 @@
 const contenedor = document.getElementById("productos");
-
-// URL con la colección de productos (categoría 101: Autos)
 const url = "https://japceibal.github.io/emercado-api/cats_products/101.json";
 
 fetch(url)
   .then(res => res.json())
   .then(data => {
     data.products.forEach(producto => {
-      // Crear una tarjeta para cada producto
       const card = document.createElement("div");
       card.classList.add("producto");
 
