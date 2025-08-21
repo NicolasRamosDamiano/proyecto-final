@@ -5,7 +5,9 @@
     gap: 18px;
 
 }
-
+h1{
+     margin-top: -8px;
+}
 
 
 body{
@@ -34,7 +36,8 @@ img{
     width: 400px;
     height: 600px;
     border-radius: 8px;
-   background: linear-gradient(to bottom, rgb(251,204,35), #ffffff);;
+   background: linear-gradient(to bottom, rgb(251,204,35), #ffffff);
+  
 }
 .contenedor h3{
     font-family: sans-serif;
@@ -46,6 +49,9 @@ img{
     font-size: 20px;
 }
 
+.caja{
+     margin-top: -20px;
+}
 
 
 input{
