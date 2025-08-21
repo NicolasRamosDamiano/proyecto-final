@@ -1,3 +1,4 @@
+
 const contenedor = document.getElementById("productos");
 const url = "https://japceibal.github.io/emercado-api/cats_products/101.json";
 
@@ -9,12 +10,12 @@ fetch(url)
       card.classList.add("producto");
 
       card.innerHTML = `
-        <img src="${producto.image}" alt="${producto.name}" class="producto-img">
-        <h3>${producto.name}</h3>
-        <p>${producto.description}</p>
-        <p><strong>Precio:</strong> ${producto.currency} ${producto.cost}</p>
-        <p><strong>Vendidos:</strong> ${producto.soldCount}</p>
-      `;
+      <img src="${producto.image}" alt="${producto.name}" class="producto-img">
+        <h3 class="producto-nombre">${producto.name}</h3>
+        <p class="producto-descripcion">${producto.description}</p>
+        <p class="producto-precio"><strong>Precio:</strong> ${producto.currency} ${producto.cost}</p>
+        <p class="producto-vendido"><strong>Vendidos:</strong> ${producto.soldCount}</p>
+    `;
 
       contenedor.appendChild(card);
     });
