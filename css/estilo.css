@@ -1,18 +1,17 @@
-/* Contenedor en columnas, probamos? ok que queres poner? xd ponelo podes hacerlo >v
- lla tire control z ok*/ 
+/* Contenedor en columnas,*/ 
 #productos {
-display: flex;
-grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* columnas responsivas */
+display: grid;
+grid-template-columns: repeat(2, 1fr);
 gap: 20px;
 padding: 20px;
 }
 
 /* Tarjeta */
 .producto {
-  align-items: center;
-  text-align: center;
-  height: 400px;
-  width: 500px;
+align-items: center;
+text-align: center;
+height: 400px;
+width: 500px;
 border: 1px solid #ddd;
 border-radius: 10px;
 padding: 15px;
