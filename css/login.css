@@ -27,17 +27,12 @@ img{
     width: 200px;
 }
 
-
-
-
 .contenedor{
     display: grid;
     place-items: center;
     width: 400px;
     height: 600px;
-    border-radius: 8px;
-   background: linear-gradient(to bottom, rgb(251,204,35), #ffffff);
-  
+    border-radius: 8px;      
 }
 .contenedor h3{
     font-family: sans-serif;
