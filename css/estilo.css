@@ -1,8 +1,9 @@
 /*titulo*/
 h1{
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    text-align: center;
-
+font-family: 'Poppins';
+font-size: 45px;
+text-align: center;
+font-weight: 900px;
 }
 
 body{
@@ -10,13 +11,11 @@ body{
     padding: 0;
 }
 
-
-/* Contenedor en columnas y fondo*/ 
 #productos {
 display: grid;
 width: 100%;
-margin: 0 auto /* Centrado horizontal */;
-max-width: 1200px; /* Establece un ancho máximo */
+margin: 0 auto;
+max-width: 1200px;
 grid-template-columns: repeat(3, 1fr);
 gap: 80px;
 align-items: center;
@@ -24,60 +23,53 @@ justify-content: center;
 background-color: rgb(255, 255, 255);
 }
 
-/* Tarjeta */
 .producto {
+    margin-top: 20px;
 align-items: center;
 text-align: center;
-height: 375px; /*alto fijo*/
+height: 375px;
 border: 1px solid #ffffff;
 border-radius: 10px;
-box-shadow: 0 4px 6px rgba(0,0,0,0.1);  /* Sombra suave */
+box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 padding: 15px;
 background: linear-gradient(to bottom, #f9f09c, rgb(249, 237, 71));
-overflow: hidden;  /*Lo que hace es ocultar el contenido sobrante que se sale del ancho o alto del contenedor.*/
-transition: transform 0.3s ease; /* Transición suave al pasar el mouse */
-box-shadow: 0.4s ease ; /*animaciones*/ /* ease: La animación empieza despacio, luego acelera y finalmente vuelve a ir despacio al terminar.*/
+overflow: hidden;
+transition: transform 0.3s ease;
+box-shadow: 0.4s ease ;
 }
 
-/*Animación cuando se pasa el mouse por encima*/
 .producto:hover {
 transform: translateY(-5px);
 }
 
-/* Imagen */
 .producto-img {
 width: 100%;
 height: 200px;
-object-fit: cover; /* Ajusta imagen recortando sin deformar */
-border-bottom: 1px solid #ddd; /* Línea separadora */
+object-fit: cover;
+border-bottom: 1px solid #ddd;
 border-radius: 12px;
-box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); /* Pequeña sombra interna */
+box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
 }
 
 
-/* Nombre */
 .producto-nombre {
-font-size: 1.2rem; /*relativo al tamaño de fuente del elemento padre*/
+font-size: 1.2rem;
 margin: 12px 0;
-padding: 0 10px; /* Espaciado interno lateral */
+padding: 0 10px;
 color: #000000;
-text-align: center; /* Centrado */
-line-height: 1.4; /* Espacio entre líneas */
+text-align: center;
+line-height: 1.4;
 }
 
-
-/* Descripción */
 .producto-descripcion {
 font-size: 0.95rem;
 color: #555;
-margin: 0 0 12px; /* Margen inferior */
-padding: 0 10px; /* Espacio lateral */
-text-align: justify; /* Texto justificado */
+margin: 0 0 12px;
+padding: 0 10px; 
+text-align: justify;
 font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-
-/* Precio */
 .producto-precio {
 font-size: 1.1rem;
 font-weight: bold;;
@@ -89,60 +81,34 @@ text-align: center;
 font-family: Roboto;
 }
 
-/* Vendidos */
 .producto-vendidos {
 font-size: 14px;
 color: #999;
 }
 
-
-/* Barra vertical arriba */
-#navbarNav {
-    position: center; 
-    height: 100px;
-    width: 100%;
-    background-color: #ffff00;  
-    display: flex;     
-    justify-content: center; /* centra los items */    
+*{
+    margin-top: 0%;
 }
 
-/*Formato de los enlaces*/
-#navbarNav a {
+.orden{
     display: flex;
-    margin-bottom: 8px;
-    text-align: center;
-    text-decoration: none;
-    padding: 2px;
-    color: #000000;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 15px;
-    border-radius: 8px;    
-    transition: background 0.3s ease, color 0.3s ease;
+    justify-content: space-between;
+    font-size: 4vb;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    font-family: 'Poppins';
+ 
 }
-
-#navbarNav a:hover {
-  background-color: #ffffff; /* efecto hover */
-}
-
-/*Saca los puntos negros que hacen referencia a una lista (inicio,categorias,vender)*/
-.navbar-nav{
-    list-style: none;
-    width: auto;
-    margin: 0;
-    padding: 0;
-    align-items: center; 
-
-}
-
-.link-button
-
-/*nav items - inicio, categorías, vender*/
-.nav-item{
-    top: 0;
-    left: 0;
-    height: 100vh;
+.container{
     width: 100%;
-    background-color: #ffffff;
+    background-color: #ffff00;   
+    justify-content: center;
+    margin-top: 0%;  
+}
+.nav-link{
+    color: #000000;
+
 }
 
 footer{
@@ -160,8 +126,6 @@ footer{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-
-/* 1,2,3,...*/
 .pagination a {
     display: inline-block;
     font-size: 13px;
@@ -172,7 +136,6 @@ footer{
     border: 0.5px solid rgb(255, 255, 255);
 }
 
-/*Volver arriba y Este sitio forma parte de JaP*/
 footer p {
     position: center;
     font-size: 12px;
@@ -182,11 +145,3 @@ footer p {
     
 }
 
-
-/*NOTAS:
-    SECCION 1: 
-
-
-    En HTML, la etiqueta nav significa navegación (navigation en inglés). 
-    Se usa para encerrar enlaces de navegación importantes dentro de una página web
-*/
