@@ -1,0 +1,80 @@
+
+.titulo{
+    text-align: center;
+    font-family: sans-serif;
+    gap: 18px;
+
+}
+h1{
+     margin-top: -8px;
+}
+
+
+body{
+  background: linear-gradient(to bottom, rgb(251,204,35), #ffffff);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+img{
+    height: 200px;
+    width: 200px;
+}
+
+
+
+
+.contenedor{
+    display: grid;
+    place-items: center;
+    width: 400px;
+    height: 600px;
+    border-radius: 8px;
+   background: linear-gradient(to bottom, rgb(251,204,35), #ffffff);
+  
+}
+.contenedor h3{
+    font-family: sans-serif;
+    margin-right: 200px;
+}
+.contenedor h2{
+    font-family: sans-serif;
+    margin-right: 220px;
+    font-size: 20px;
+}
+
+.caja{
+     margin-top: -20px;
+}
+
+
+input{
+    font-size: 15px;
+    border-radius: 8px;
+    background-color: rgb(239, 225, 252);
+    height: 30px;
+    width: 300px;
+}
+
+button{
+    cursor: pointer;
+    font-size: 15px;
+    font-family: sans-serif;
+    background-color: rgb(255, 234, 0);
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    gap: 10px;
+    border-radius: 30px;
+    border-width: 3px;
+    width: 150px;
+}
+
+button:hover{
+    background-color: rgb(0, 81, 255);
+}
