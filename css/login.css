@@ -76,7 +76,7 @@ button:hover{
 /*Tablet*/
 @media (max-width: 1024px) and (min-width: 600px) {
   body {
-    background: linear-gradient(135deg, #3f87a6, #d6eaf8);
+    background: linear-gradient(to bottom, rgb(251,204,35), #ffffff);;
   }
   .contenedor {
     width: 350px;
