@@ -73,3 +73,64 @@ button{
 button:hover{
     background-color: rgb(0, 81, 255);
 }
+
+/ Escritorio /  
+@media (min-width: 1025px) {
+  .contenedor {
+    width: 400px;
+  }
+  .imagen img {
+    width: 100px;
+  }
+  .imagen h1 {
+    font-size: 28px;
+  }
+}
+
+/Tablet/
+@media (max-width: 1024px) and (min-width: 600px) {
+  body {
+    background: linear-gradient(135deg, #3f87a6, #d6eaf8);
+  }
+  .contenedor {
+    width: 350px;
+    padding: 25px;
+  }
+  .imagen img {
+    width: 90px;
+  }
+  .imagen h1 {
+    font-size: 24px;
+  }
+}
+
+/ para iphone /
+@media (max-width: 599px) {
+  body {
+    background: white;
+    padding: 10px;
+  }
+  .contenedor {
+    width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 20px;
+  }
+  .imagen img {
+    width: 70px;
+  }
+  .imagen h1 {
+    font-size: 20px;
+  }
+  .caja h2, .caja h3 {
+    font-size: 14px;
+  }
+  .caja input {
+    font-size: 12px;
+    padding: 8px;
+  }
+  .boton {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
