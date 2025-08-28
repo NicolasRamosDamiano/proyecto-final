@@ -93,7 +93,7 @@ button:hover{
 /* para celu */
 @media (max-width: 599px) {
   body {
-    background: white;
+    background: linear-gradient(to bottom, rgb(251,204,35), #ffffff);
     padding: 10px;
   }
   .contenedor {
