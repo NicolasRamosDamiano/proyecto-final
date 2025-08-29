@@ -160,7 +160,8 @@ footer p {
 }
 
 /*para celular*/ 
-@media (max-width: 767px) {
+
+@media (max-width: 568px) {
     #productos {
         grid-template-columns: repeat(1, 1fr);
         gap: 30px;
