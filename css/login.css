@@ -73,10 +73,31 @@ button{
 button:hover{
     background-color: rgb(0, 81, 255);
 }
+
 /*Tablet*/
 @media (max-width: 1024px) and (min-width: 600px) {
   body {
     background: linear-gradient(to bottom, rgb(251,204,35), #ffffff);;
+=======
+
+/*Escritorio*/  
+@media (min-width: 1025px) {
+  .contenedor {
+    width: 400px;
+  }
+  .imagen img {
+    width: 100px;
+  }
+  .imagen h1 {
+    font-size: 28px;
+  }
+}
+
+/*Tablet*/
+@media (max-width: 1024px) and (min-width: 600px) {
+  body {
+    background: linear-gradient(135deg, #3f87a6, #d6eaf8);
+
   }
   .contenedor {
     width: 350px;
@@ -90,10 +111,17 @@ button:hover{
   }
 }
 
+
 /* para celu */
 @media (max-width: 599px) {
   body {
     background: linear-gradient(to bottom, rgb(251,204,35), #ffffff);
+
+/ para iphone /
+@media (max-width: 599px) {
+  body {
+    background: white;
+
     padding: 10px;
   }
   .contenedor {
