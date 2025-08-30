@@ -188,3 +188,22 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+    #logout {
+      background-color: #ff0;
+      margin-left: 10px;
+      color: rgb(0, 0, 0);
+      cursor: pointer;
+      position: absolute;
+      top: 12px;
+      right: 20px;
+    }
+    #logout:hover{
+      background-color: #f0a503;
+    }
+
+    #usuario{
+      color: #fff;
+      margin-right: 200px;
+
+    }
