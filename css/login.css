@@ -74,18 +74,10 @@ button:hover{
     background-color: rgb(0, 81, 255);
 }
 
-
-
-/*Escritorio*/  
+/*Escritorio*/
 @media (min-width: 1025px) {
   .contenedor {
     width: 400px;
-  }
-  .imagen img {
-    width: 100px;
-  }
-  .imagen h1 {
-    font-size: 28px;
   }
   }
 
@@ -99,14 +91,8 @@ button:hover{
     width: 350px;
     padding: 25px;
   }
-  .imagen img {
-    width: 90px;
-  }
-  .imagen h1 {
-    font-size: 24px;
-  }
-}
 
+  
 
 /* para celu */
 @media (max-width: 599px) {
@@ -120,11 +106,6 @@ button:hover{
     border-radius: 0;
     padding: 20px;
   }
-  .imagen img {
-    width: 70px;
-  }
-  .imagen h1 {
-    font-size: 20px;
   }
   .caja h2, .caja h3 {
     font-size: 14px;
@@ -137,4 +118,3 @@ button:hover{
     font-size: 14px;
     padding: 10px;
   }
-}
