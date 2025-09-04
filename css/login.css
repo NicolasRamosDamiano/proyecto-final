@@ -76,45 +76,14 @@ button:hover{
 
 /*Escritorio*/
 @media (min-width: 1025px) {
-  .contenedor {
-    width: 400px;
-  }
   }
 
 /*Tablet*/
 @media (max-width: 1024px) and (min-width: 600px) {
-  body {
-    background: linear-gradient(to bottom, rgb(251,204,35), #ffffff);;
-
-  }
-  .contenedor {
-    width: 350px;
-    padding: 25px;
-  }
-
-  
-
+ 
+}
 /* para celu */
 @media (max-width: 599px) {
-  body {
-    background: linear-gradient(to bottom, rgb(251,204,35), #ffffff);
-   padding: 10px;
+  
   }
-  .contenedor {
-    width: 100%;
-    box-shadow: none;
-    border-radius: 0;
-    padding: 20px;
-  }
-  }
-  .caja h2, .caja h3 {
-    font-size: 14px;
-  }
-  .caja input {
-    font-size: 12px;
-    padding: 8px;
-  }
-  .boton {
-    font-size: 14px;
-    padding: 10px;
-  }
+  
