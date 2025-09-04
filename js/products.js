@@ -1,6 +1,6 @@
-
+const categoriaId = localStorage.getItem("catID");
 const contenedor = document.getElementById("productos");
-const url = "https://japceibal.github.io/emercado-api/cats_products/101.json";
+const url = `https://japceibal.github.io/emercado-api/cats_products/${categoriaId}.json`;
 
 fetch(url)
   .then(res => res.json())
