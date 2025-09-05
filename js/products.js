@@ -17,6 +17,12 @@ fetch(url)
         <p class="producto-vendido"><strong>Vendidos:</strong> ${producto.soldCount}</p>
     `;
 
+      // evento para ir a la info del producto especifico
+      card.addEventListener("click", () => {
+        localStorage.setItem("productID", producto.id); 
+        window.location.href = "product-info.html";    
+      });
+
       contenedor.appendChild(card);
     });
   })
