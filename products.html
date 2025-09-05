@@ -9,8 +9,6 @@
 </head>
 
 <body>
-
-
     <div class="container">
       <h1>CompraFácilUy</h1>
       <div class="orden">      
@@ -19,6 +17,30 @@
     <a class="nav-link" href="sell.html">Vender</a>
       </div>
       </div>
+
+<div class="buscador">
+  Precio mínimo:
+  <input type="number" id="minprice" placeholder="0">
+  Precio maximo:
+  <input type="number" id="maxprice" placeholder="0">
+
+   Ordenar por:
+    <select id="orden">
+      <option value="none">-- Seleccionar --</option>
+      <option value="menormayor">Precio: menor a mayor</option>
+      <option value="mayormenor">Precio: mayor a menor</option>
+      <option value="az">Nombre A-Z</option>
+      <option value="az">Nombre Z-A</option>
+    </select>
+    <button id="applyFilters">Aplicar</button>
+</div>
+
+
+
+
+
+
+
   <main>
     <section id="productos" class="productos-container"></section>
   </main>
