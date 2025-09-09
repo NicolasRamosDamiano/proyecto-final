@@ -1,20 +1,47 @@
-const productId = localStorage.getItem("productID");
-const contenedor = document.getElementById("product-info");
-const url = `https://japceibal.github.io/emercado-api/products/${productId}.json`;
+const productId = localStorage.getItem("productID"); // Obtener el ID del producto desde localStorage
+const contenedor = document.getElementById("product-info"); // Contenedor principal
+const imagesContainer = document.getElementById("product-images"); // Contenedor para las imágenes
+const url = `https://japceibal.github.io/emercado-api/products/${productId}.json`; // URL de la API
 
 fetch(url)
-  .then(res => res.json())
-  .then(producto => {
-    contenedor.innerHTML = `
-      <h2>${producto.name}</h2>
-      <p><strong>Categoría:</strong> ${producto.category}</p>
-      <p><strong>Cantidad de vendidos:</strong> ${producto.soldCount}</p>
-      <p><strong>Precio:</strong> ${producto.currency} ${producto.cost}</p>
-      <h3>Imágenes del producto:</h3>
-      <div class="imagenes">
-        ${producto.images.map(img => `<img src="${img}" alt="${producto.name}" class="product-img">`).join("")}
-      </div>
-      <p><strong>Descripción:</strong> ${producto.description}</p>
-    `;
+  .then(res => res.json()) // Convertir a JSON
+  .then(producto => { // Datos del producto
+    document.getElementById("product-name").textContent = producto.name; // Nombre del producto
+    document.getElementById("product-price").textContent = `${producto.currency} ${producto.cost}`; // Precio del producto
+    document.getElementById("product-oldprice").textContent = producto.oldCost ? `${producto.currency} ${producto.oldCost}` : ""; // Precio anterior si existe
+    document.getElementById("product-description").textContent = producto.description; // Descripción del producto
+
+    // Imagen principal
+    const mainImage = document.getElementById("product-img");
+    mainImage.src = producto.images[0];
+
+    // Miniaturas
+    const thumbsContainer = document.getElementById("product-thumbs"); //thumbs= thumbnails
+    thumbsContainer.innerHTML = ""; // Limpio por si hay algo
+
+    producto.images.forEach((img, index) => {
+      const thumb = document.createElement("img");
+      thumb.src = img;
+      thumb.alt = `${producto.name} vista ${index + 1}`;
+      thumb.classList.add("thumb-img");
+
+      thumb.addEventListener("click", () => {
+        // Agregamos clase fade-out
+        mainImage.classList.add("fade-out");
+
+        setTimeout(() => {
+          mainImage.src = img; // Cambiamos la imagen
+          mainImage.classList.remove("fade-out");
+          mainImage.classList.add("fade-in");
+
+          // Quitamos la clase después de que termine la animación
+          setTimeout(() => mainImage.classList.remove("fade-in"), 500);
+        }, 300);
+      });
+
+      thumbsContainer.appendChild(thumb);
+    });
   })
   .catch(err => console.error("Error al cargar el producto:", err));
+
+
