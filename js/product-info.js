@@ -17,22 +17,22 @@ fetch(url)
 
     // Miniaturas
     const thumbsContainer = document.getElementById("product-thumbs"); //thumbs= thumbnails
-    thumbsContainer.innerHTML = ""; // Limpio por si hay algo
+    thumbsContainer.innerHTML = ""; // El contenedor de miniaturas se vacía, por si había algo antes.
 
     producto.images.forEach((img, index) => {
-      const thumb = document.createElement("img");
-      thumb.src = img;
-      thumb.alt = `${producto.name} vista ${index + 1}`;
-      thumb.classList.add("thumb-img");
+      const thumb = document.createElement("img");  // crear imagen
+      thumb.src = img; // asignar URL
+      thumb.alt = `${producto.name} vista ${index + 1}`; //texto alternativo que aparece si la imagen no carga. Mejora el SEO
+      thumb.classList.add("thumb-img"); // estilo CSS
 
-      thumb.addEventListener("click", () => {
+      thumb.addEventListener("click", () => { // se agrega animación de salida
         // Agregamos clase fade-out
-        mainImage.classList.add("fade-out");
+        mainImage.classList.add("fade-out"); 
 
         setTimeout(() => {
-          mainImage.src = img; // Cambiamos la imagen
-          mainImage.classList.remove("fade-out");
-          mainImage.classList.add("fade-in");
+          mainImage.src = img; // Cambia la foto principal
+          mainImage.classList.remove("fade-out"); // La foto grande se desvanece
+          mainImage.classList.add("fade-in");  // La nueva aparece suavemente
 
           // Quitamos la clase después de que termine la animación
           setTimeout(() => mainImage.classList.remove("fade-in"), 500);
