@@ -39,7 +39,7 @@ fetch(url)
         }, 300);
       });
 
-      thumbsContainer.appendChild(thumb);
+      thumbsContainer.appendChild(thumb); //Cada miniatura creada se mete en el contenedor. (DOM)
     });
   })
   .catch(err => console.error("Error al cargar el producto:", err));
