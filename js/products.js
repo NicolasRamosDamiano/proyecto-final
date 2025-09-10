@@ -5,6 +5,7 @@ const url = `https://japceibal.github.io/emercado-api/cats_products/${categoriaI
 fetch(url)
   .then(res => res.json())
   .then(data => {
+    console.log("existo");
     data.products.forEach(producto => {
       const card = document.createElement("div");
       card.classList.add("producto");
@@ -19,5 +20,8 @@ fetch(url)
 
       contenedor.appendChild(card);
     });
+    filtradorpromax();
   })
   .catch(err => console.error("Error al cargar productos:", err));
+
+  
