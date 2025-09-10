@@ -191,3 +191,13 @@ footer p {
 }
 
 
+#busca {
+    background-color: rgb(255, 243, 243);
+    border-radius: 10px;
+    width: 350px;
+    cursor: pointer;
+    
+
+
+
+}
