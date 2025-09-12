@@ -11,10 +11,8 @@ const clearFilterBtn = document.getElementById("clearFilterBtn");
 const url = `https://japceibal.github.io/emercado-api/cats_products/${categoriaId}.json`;
 
 
-let productos = [];         // Productos originales
-let productosFiltrados = []; // Lista filtrada
-
-// Traer datos desde la API
+let productos = [];        
+let productosFiltrados = []; 
 fetch(url)
   .then(res => res.json())
   .then(data => {
@@ -24,7 +22,6 @@ fetch(url)
   })
   .catch(err => console.error("Error al cargar productos:", err));
 
-// Función para mostrar productos
 function mostrarProductos(lista) {
   contenedor.innerHTML = "";
 
@@ -48,24 +45,20 @@ function mostrarProductos(lista) {
   });
 }
 
-// Ordenar de menor a mayor
 sortAscBtn.addEventListener("click", () => {
   productosFiltrados.sort((a, b) => a.cost - b.cost);
   mostrarProductos(productosFiltrados);
 });
 
-// Ordenar de mayor a menor
 sortDescBtn.addEventListener("click", () => {
   productosFiltrados.sort((a, b) => b.cost - a.cost);
   mostrarProductos(productosFiltrados);
 });
 
-// Filtrar por precio mínimo y máximo
 filterPriceBtn.addEventListener("click", () => {
   aplicarFiltros();
 });
 
-// Limpiar filtros
 clearFilterBtn.addEventListener("click", () => {
   minPriceInput.value = "";
   maxPriceInput.value = "";
@@ -74,7 +67,6 @@ clearFilterBtn.addEventListener("click", () => {
   mostrarProductos(productosFiltrados);
 });
 
-// Función que combina todos los filtros
 function aplicarFiltros() {
   const texto = searchInput.value.toLowerCase();
   const precioMin = parseFloat(minPriceInput.value) || 0;
