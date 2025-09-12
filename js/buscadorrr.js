@@ -1,3 +1,4 @@
+
 function filtradorpromax() {
     console.log("existo-2");
     // 1. Obtiene las referencias a los elementos del DOM
