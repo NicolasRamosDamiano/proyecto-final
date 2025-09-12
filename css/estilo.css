@@ -100,23 +100,27 @@ color: #999;
     font-family: 'Poppins';
  
 }
-.container{
-    width: 100%;
-    background-color: #ffff00;   
-    justify-content: center;
-    margin-top: 0%;  
-}
+
 .nav-link{
     color: #000000;
 
 }
 
+header{ 
+    height: 100%;
+    width: 100%;
+    background-color: #ffff00;   
+    justify-content: center;
+    margin-top: 0%;  
+}
+
 footer{
-    margin-top: 30px;
-    padding: 2px;
-    color: white;
     text-align: center;
     height: 100%;
+    width: 100%;
+    background-color: #ffff00;   
+    justify-content: center;
+    margin-top: 0%;  
 }
 
 
