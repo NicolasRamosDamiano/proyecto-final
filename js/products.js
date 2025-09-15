@@ -25,5 +25,6 @@ fetch(url)
 
     contenedor.appendChild(card);
   });
-}
+  filtradorpromax()
+});
 

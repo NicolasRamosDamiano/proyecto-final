@@ -3,11 +3,11 @@ function filtradorpromax() {
     console.log("existo-2");
     // 1. Obtiene las referencias a los elementos del DOM
     const searchInput = document.getElementById('busca'); // Asume que el input tiene el ID 'searchInput'
-    const articles = document.querySelectorAll('.producto'); // Asume que los elementos a filtrar tienen la clase 'article'
-    const noResultsMessage = document.getElementById('noResultsMessage'); // Mensaje de "no resultados"
+    
 
     // 2. Define la función que filtrará los artículos
     const filterArticles = () => {
+        const articles = document.querySelectorAll('.producto'); // Asume que los elementos a filtrar tienen la clase 'article'
         // Convierte el texto de búsqueda a minúsculas y elimina espacios en blanco
         const searchText = searchInput.value.toLowerCase().trim();
         let anyResultFound = false;
@@ -26,15 +26,11 @@ function filtradorpromax() {
                 anyResultFound = true;
             } else {
                 article.style.display = 'none'; // Oculta el artículo si no coincide
+                
             }
         });
 
-        // 3. Muestra u oculta el mensaje de "no resultados"
-        if (anyResultFound) {
-            noResultsMessage.style.display = 'none';
-        } else {
-            noResultsMessage.style.display = 'block';
-        }
+       
     };
 
     // 4. Asigna el evento 'input' para llamar a la función de filtro en tiempo real
