@@ -1,49 +1,64 @@
 .contenedor{
-  margin
+    display: flex; 
+    align-items: center; /* Alinea verticalmente los elementos al centro */
+    gap: 30px; 
+    margin: 20px; 
+}
+
+#navbar1{
+  background-color: yellow;
 }
 
 
+body{
+  background-color: rgb(255, 255, 255); /*Que paleta de colores usamos?*/
+
+}
+
 /* Imagen principal */
 .main-img {
-  width: 100%;
-  max-height: 400px;
-  object-fit: contain;
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-  opacity: 1;
+    width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    opacity: 1;
 }
 
 /* Cuando cambia la imagen */
 .main-img.fade-out {
-  opacity: 0;
-  transform: scale(0.95);
+    opacity: 0;
+    transform: scale(0.95);
 }
 
 .main-img.fade-in {
-  opacity: 1;
-  transform: scale(1);
+    opacity: 1;
+    transform: scale(1);
 }
 
 /* Miniaturas */
 .thumbs {
-  margin-top: 10px;
-  display: flex;
-  gap: 10px;
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
 }
 
 .thumb-img {
-  width: 70px;
-  height: 70px;
-  object-fit: cover;
-  cursor: pointer;
-  border: 2px solid transparent;
-  border-radius: 6px;
-  transition: transform 0.3s, border-color 0.3s;
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    transition: transform 0.3s, border-color 0.3s;
 }
 
 .thumb-img:hover {
-  transform: scale(1.1);
-  border-color: #000;
+    transform: scale(1.1);
+    border-color: #000;
 }
 
 
+footer{
+  background-color: #ffffff; /*Que paleta de colores usamos?*/
+}
 

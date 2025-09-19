@@ -11,7 +11,7 @@
 
 <body>
   <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light" id="navbar1">
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" href="#!">CompraFácilUY</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -32,7 +32,7 @@
                     <form class="d-flex">
                         <button class="btn btn-outline-dark" type="submit">
                             <i class="bi-cart-fill me-1"></i>
-                            Cart
+                            Carrito
                             <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                         </button>
                     </form>
@@ -41,31 +41,31 @@
         </nav>
     
   <section class="py-5">
-  <div class="container px-4 px-lg-5 my-5">
-    <div class="row gx-4 gx-lg-5 align-items-center">
-      <div class="col-md-6">
-      <div class="product">
-       <div class="product-images">
-      <img id="product-img" src="" alt="Imagen principal" class="main-img"> <!-- imagen principal -->
-    <div id="product-thumbs" class="thumbs"></div> <!-- miniaturas -->
-  </div>
-      <div class="col-md-6">
-        <h1 class="display-5 fw-bolder" id="product-name"></h1>
-        <div class="fs-5 mb-5">
-          <span class="text-decoration-line-through" id="product-oldprice"></span> <!-- precio anterior -->
-          <span id="product-price"></span> <!-- precio actual-->
-        </div>
-        <p class="lead" id="product-description"></p> <!-- descripcion -->
-        <div class="d-flex">
-          <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-          <button class="btn btn-outline-dark flex-shrink-0" type="button">
-            <i class="bi-cart-fill me-1"></i>
-            Añadir al carrito
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+
+            <div class="col-md-6">
+                <img id="product-img" src="" alt="Imagen principal" class="main-img card-img-top mb-3"> 
+                <div id="product-thumbs" class="thumbs"></div> 
+            </div>
+
+            <div class="col-md-6">
+                <h1 class="display-5 fw-bolder" id="product-name"></h1>
+                <div class="fs-5 mb-3">
+                    <span class="text-decoration-line-through" id="product-oldprice"></span>
+                    <span id="product-price"></span>
+                </div>
+                <p class="lead" id="product-description"></p>
+                <div class="d-flex">
+                    <input class="form-control text-center me-3" id="inputQuantity" type="number" value="1" style="max-width: 4rem" />
+                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                        <i class="bi-cart-fill me-1"></i>
+                        Añadir al carrito
+                    </button>
+                </div>
+            </div>
+
+        </div> </div>
 </section>
 
   
