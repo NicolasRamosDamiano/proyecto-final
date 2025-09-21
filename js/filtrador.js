@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const categoriaId = localStorage.getItem("catID");
   const contenedor = document.getElementById("productos");
   const searchInput = document.getElementById("searchInput");
-  const sortAscBtn = document.getElementById("sortAscBtn");
-  const sortDescBtn = document.getElementById("sortDescBtn");
+  const sortAscBtn = document.getElementById("sortAscBtn"); // Menor a mayor relevancia
+  const sortDescBtn = document.getElementById("sortDescBtn"); // Mayor a menor relevancia
   const minPriceInput = document.getElementById("minPrice");
   const maxPriceInput = document.getElementById("maxPrice");
   const filterPriceBtn = document.getElementById("filterPriceBtn");
@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
       contenedor.innerHTML = `<p>Error al cargar productos: ${err.message}</p>`;
     });
 
+  // Función para mostrar productos
   function mostrarProductos(lista) {
     contenedor.innerHTML = "";
     if (!Array.isArray(lista) || lista.length === 0) {
@@ -59,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <p class="producto-vendido"><strong>Vendidos:</strong> ${producto.soldCount}</p>
       `;
 
-      // Almacena id y redirige
+      // Almacena id y redirige a product-info
       card.addEventListener("click", () => {
         localStorage.setItem("productID", producto.id);
         window.location.href = "product-info.html";
@@ -69,13 +70,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Filtrar productos por texto y rango de precios
   function aplicarFiltros() {
     const texto = (searchInput && searchInput.value) ? searchInput.value.toLowerCase() : "";
     const precioMin = parseFloat(minPriceInput && minPriceInput.value) || 0;
     const precioMax = parseFloat(maxPriceInput && maxPriceInput.value) || Infinity;
 
     productosFiltrados = productos.filter(p => {
-      const cumpleTexto = !texto || (p.name && p.name.toLowerCase().includes(texto));
+      const cumpleTexto = !texto || 
+        (p.name && p.name.toLowerCase().includes(texto)) || 
+        (p.description && p.description.toLowerCase().includes(texto));
       const cost = Number(p.cost) || 0;
       const cumplePrecio = cost >= precioMin && cost <= precioMax;
       return cumpleTexto && cumplePrecio;
@@ -84,23 +88,33 @@ document.addEventListener('DOMContentLoaded', () => {
     mostrarProductos(productosFiltrados);
   }
 
-  // Listeners (solo si existen los elementos)
+  // Ordenar por relevancia (cantidad vendida)
   if (sortAscBtn) {
     sortAscBtn.addEventListener("click", () => {
-      productosFiltrados.sort((a, b) => (Number(a.cost) || 0) - (Number(b.cost) || 0));
+      // Menor a mayor relevancia (menos vendidos primero)
+      productosFiltrados.sort((a, b) => (Number(a.soldCount) || 0) - (Number(b.soldCount) || 0));
       mostrarProductos(productosFiltrados);
     });
-  } else console.warn("sortAscBtn no encontrado en DOM.");
+  } else {
+    console.warn("sortAscBtn no encontrado en DOM.");
+  }
 
   if (sortDescBtn) {
     sortDescBtn.addEventListener("click", () => {
-      productosFiltrados.sort((a, b) => (Number(b.cost) || 0) - (Number(a.cost) || 0));
+      // Mayor a menor relevancia (más vendidos primero)
+      productosFiltrados.sort((a, b) => (Number(b.soldCount) || 0) - (Number(a.soldCount) || 0));
       mostrarProductos(productosFiltrados);
     });
+  } else {
+    console.warn("sortDescBtn no encontrado en DOM.");
   }
 
-  if (filterPriceBtn) filterPriceBtn.addEventListener("click", aplicarFiltros);
+  // Aplicar filtros cuando se presiona el botón
+  if (filterPriceBtn) {
+    filterPriceBtn.addEventListener("click", aplicarFiltros);
+  }
 
+  // Limpiar filtros
   if (clearFilterBtn) {
     clearFilterBtn.addEventListener("click", () => {
       if (minPriceInput) minPriceInput.value = "";
