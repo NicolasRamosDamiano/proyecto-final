@@ -61,3 +61,14 @@ body{
 footer{
   background-color: #ffffff; /*Que paleta de colores usamos?*/
 }
+
+
+.comentame_esta{
+    font-family: Italiana, serif;
+    box-shadow: #000000 5px 5px 15px;
+    background-color: #9387d8;
+    content:flex;
+    margin: 300px;
+    padding: 10px;
+    border: 3px solid #9387d8;
+}
