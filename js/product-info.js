@@ -41,5 +41,37 @@ fetch(url)
 
       thumbsContainer.appendChild(thumb); //Cada miniatura creada se mete en el contenedor. (DOM)
     });
+
+    let catID = localStorage.getItem("catID");
+    let url = "https://japceibal.github.io/emercado-api/cats_products/" + catID + ".json";
+    let contenedor = document.getElementById("containerRecomendados");
+
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        contenedor.innerHTML = ""; 
+        
+        data.products.forEach(prod => {
+          contenedor.innerHTML += `
+            <div class="col mb-5">
+              <div class="card h-100 border-0 shadow-sm">
+                <img class="card-img-top" src="${prod.image}" alt="${prod.name}">
+                <div class="card-body p-4 text-center">
+                  <h5 class="fw-bolder fs-6">${prod.name}</h5>
+                  ${prod.currency} ${prod.cost}
+                </div>
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center">
+                  <button class="btn btn-outline-dark mt-auto" onclick="localStorage.setItem('productID', ${prod.id}); location.href='product-info.html'">
+                    Ver producto
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+      });
+
+
+
   })
   .catch(err => console.error("Error al cargar el producto:", err));
