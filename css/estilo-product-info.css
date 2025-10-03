@@ -59,5 +59,15 @@ body{
 
 
 footer{
-  background-color: #ffffff; /*Que paleta de colores usamos?*/
+  background-color: #ffffff;
+}
+
+.icono-sol {
+  fill: rgb(108, 106, 106);
+  transition: fill 0.3s;
+  cursor: pointer;
+}
+
+.estrella.seleccionada .icono-sol {
+  fill: gold;
 }
