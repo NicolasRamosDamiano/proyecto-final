@@ -88,17 +88,6 @@ function crearHTMLComentario(comentario) {
         year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
     });
 
-    // 2. Generación de Estrellas (Calificación)
-    let estrellasHTML = '';
-    for (let i = 1; i <= 5; i++) {
-        // Llena la estrella si su índice es menor o igual a la puntuación (score)
-        if (i <= comentario.score) {
-            estrellasHTML += '<span class="fa fa-star checked"></span>'; // Estrella llena (color)
-        } else {
-            estrellasHTML += '<span class="fa fa-star"></span>'; // Estrella vacía (sin color)
-        }
-    }
-
     // 3. Estructura del Comentario
     return `
         <div class="list-group-item">
@@ -107,7 +96,7 @@ function crearHTMLComentario(comentario) {
                     <strong class="text-primary">${comentario.user}</strong> 
                     <small class="text-muted">(${fecha})</small>
                 </h5>
-                <small>${estrellasHTML}</small>
+                
             </div>
             <p class="mb-1">${comentario.description}</p>
         </div>
@@ -116,3 +105,27 @@ function crearHTMLComentario(comentario) {
     // user = Usuario
     // dateTime = Fecha
 }
+
+
+
+const boton = document.getElementById('publicar1');
+const input = document.getElementById('comentar');
+
+
+boton.addEventListener('click', () => {
+  const texto = input.value.trim();
+const usuario = localStorage.getItem('currentUser');
+
+  if (texto !== '') {
+    const comentario = {
+        user: usuario,
+      description: texto,
+      dateTime: new Date()
+    };
+
+    const html = crearHTMLComentario(comentario);
+    contenedorComentarios.insertAdjacentHTML('beforeend', html);
+
+    input.value = '';
+  }
+});
