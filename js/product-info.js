@@ -1,77 +1,139 @@
-const productId = localStorage.getItem("productID"); // Obtener el ID del producto desde localStorage
-const contenedor = document.getElementById("product-info"); // Contenedor principal
-const imagesContainer = document.getElementById("product-images"); // Contenedor para las imágenes
-const url = `https://japceibal.github.io/emercado-api/products/${productId}.json`; // URL de la API
+// === PRODUCT INFO ===
 
-fetch(url)
-  .then(res => res.json()) // Convertir a JSON
-  .then(producto => { // Datos del producto
-    document.getElementById("product-name").textContent = producto.name; // Nombre del producto
-    document.getElementById("product-price").textContent = `${producto.currency} ${producto.cost}`; // Precio del producto
-    document.getElementById("product-oldprice").textContent = producto.oldCost ? `${producto.currency} ${producto.oldCost}` : ""; // Precio anterior si existe
-    document.getElementById("product-description").textContent = producto.description; // Descripción del producto
+// Obtener el ID del producto desde el localStorage
+const productId = localStorage.getItem("productID");
 
-    // Imagen principal
-    const mainImage = document.getElementById("product-img");
-    mainImage.src = producto.images[0];
+// Contenedores principales
+const productName = document.getElementById("product-name");
+const productPrice = document.getElementById("product-price");
+const productOldPrice = document.getElementById("product-oldprice");
+const productDescription = document.getElementById("product-description");
+const productImg = document.getElementById("product-img");
+const productThumbs = document.getElementById("product-thumbs");
+const containerRecomendados = document.getElementById("containerRecomendados");
+
+// URLs de la API
+const URL_PRODUCT = `https://japceibal.github.io/emercado-api/products/${productId}.json`;
+const URL_COMMENTS = `https://japceibal.github.io/emercado-api/products_comments/${productId}.json`;
+
+// === Renderizar estrellas ===
+function renderStars(score) {
+  let stars = "";
+  for (let i = 1; i <= 5; i++) {
+    stars += `<span class="fa fa-star ${i <= score ? "checked" : ""}"></span>`;
+  }
+  return stars;
+}
+
+// === Cargar información del producto ===
+fetch(URL_PRODUCT)
+  .then(res => res.json())
+  .then(product => {
+    productName.textContent = product.name;
+    productPrice.textContent = `${product.currency} ${product.cost}`;
+    productOldPrice.textContent = product.oldCost ? `${product.currency} ${product.oldCost}` : "";
+    productDescription.textContent = product.description;
+    productImg.src = product.images[0];
+
+    // Mostrar estrellas promedio del producto (inicialmente vacío, luego lo completa el fetch de comentarios)
+    const promedioTexto = document.getElementById("promedio-texto");
+    promedioTexto.innerHTML = `<p class="text-muted">Cargando puntuación...</p>`;
 
     // Miniaturas
-    const thumbsContainer = document.getElementById("product-thumbs"); //thumbs= thumbnails
-    thumbsContainer.innerHTML = ""; // El contenedor de miniaturas se vacía, por si había algo antes.
+    productThumbs.innerHTML = product.images
+      .map(img => `<img src="${img}" class="thumb" alt="Miniatura" onclick="updateMainImage('${img}')">`)
+      .join("");
 
-    producto.images.forEach((img, index) => {
-      const thumb = document.createElement("img");  // crear imagen
-      thumb.src = img; // asignar URL
-      thumb.alt = `${producto.name} vista ${index + 1}`; //texto alternativo que aparece si la imagen no carga. Mejora el SEO
-      thumb.classList.add("thumb-img"); // estilo CSS
-
-      thumb.addEventListener("click", () => { // se agrega animación de salida
-        // Agregamos clase fade-out
-        mainImage.classList.add("fade-out"); 
-
-        setTimeout(() => {
-          mainImage.src = img; // Cambia la foto principal
-          mainImage.classList.remove("fade-out"); // La foto grande se desvanece
-          mainImage.classList.add("fade-in");  // La nueva aparece suavemente
-
-          // Quitamos la clase después de que termine la animación
-          setTimeout(() => mainImage.classList.remove("fade-in"), 500);
-        }, 300);
-      });
-
-      thumbsContainer.appendChild(thumb); //Cada miniatura creada se mete en el contenedor. (DOM)
-    });
-
-    let catID = localStorage.getItem("catID");
-    let url = "https://japceibal.github.io/emercado-api/cats_products/" + catID + ".json";
-    let contenedor = document.getElementById("containerRecomendados");
-
-    fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        contenedor.innerHTML = ""; 
-        
-        data.products.forEach(prod => {
-          contenedor.innerHTML += `
-            <div class="col mb-5">
-              <div class="card h-100 border-0 shadow-sm">
-                <img class="card-img-top" src="${prod.image}" alt="${prod.name}">
-                <div class="card-body p-4 text-center">
-                  <h5 class="fw-bolder fs-6">${prod.name}</h5>
-                  ${prod.currency} ${prod.cost}
-                </div>
-                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center">
-                  <button class="btn btn-outline-dark mt-auto" onclick="localStorage.setItem('productID', ${prod.id}); location.href='product-info.html'">
-                    Ver producto
-                  </button>
-                </div>
-              </div>
+    // Productos relacionados (3 o 4)
+    containerRecomendados.innerHTML = product.relatedProducts
+      .slice(0, 4)
+      .map(p => `
+        <div class="col mb-5 col-sm-6 col-md-4 col-lg-3">
+          <div class="card h-100 shadow-sm" onclick="setProductID(${p.id})" style="cursor:pointer;">
+            <img class="card-img-top" src="${p.image}" alt="${p.name}">
+            <div class="card-body p-3 text-center">
+              <h6 class="fw-bold">${p.name}</h6>
             </div>
-          `;
-        });
-      });
+          </div>
+        </div>
+      `)
+      .join("");
+  });
 
+// Cambiar imagen principal
+function updateMainImage(src) {
+  productImg.src = src;
+}
 
+// === Cargar comentarios ===
+let comentarios = [];
 
-  })
-  .catch(err => console.error("Error al cargar el producto:", err));
+fetch(URL_COMMENTS)
+  .then(res => res.json())
+  .then(data => {
+    comentarios = data;
+    mostrarComentarios();
+  });
+
+// === Mostrar comentarios y promedio ===
+function mostrarComentarios() {
+  const ratingContainer = document.getElementById("rating");
+  const promedioTexto = document.getElementById("promedio-texto");
+
+  if (!comentarios.length) {
+    ratingContainer.innerHTML = "<p>No hay comentarios todavía.</p>";
+    promedioTexto.textContent = "";
+    return;
+  }
+
+  // Mostrar comentarios con estrellas
+  ratingContainer.innerHTML = comentarios
+    .map(c => `
+      <div class="comment mb-3 p-3 border rounded bg-light">
+        <p><strong>${c.user}</strong> - <span class="text-muted">${c.dateTime}</span></p>
+        <div>${renderStars(c.score)}</div>
+        <p class="mt-2">${c.description}</p>
+      </div>
+    `)
+    .join("");
+
+  // Calcular promedio
+  const promedio = comentarios.reduce((sum, c) => sum + c.score, 0) / comentarios.length;
+  promedioTexto.innerHTML = `
+    <div class="mt-3">
+      <strong>Puntaje promedio:</strong> ${promedio.toFixed(1)} / 5
+      <div>${renderStars(Math.round(promedio))}</div>
+    </div>
+  `;
+}
+
+// === Agregar nuevo comentario ===
+document.getElementById("btnComentar").addEventListener("click", () => {
+  const texto = document.getElementById("nuevoComentario").value.trim();
+  const puntuacion = parseInt(document.getElementById("puntuacion").value);
+  const usuario = localStorage.getItem("usuario") || "Usuario anónimo";
+
+  if (!texto) {
+    alert("Por favor escribe un comentario antes de enviarlo.");
+    return;
+  }
+
+  const nuevo = {
+    user: usuario,
+    description: texto,
+    score: puntuacion,
+    dateTime: new Date().toLocaleString()
+  };
+
+  comentarios.unshift(nuevo); // se agrega arriba
+  mostrarComentarios();
+
+  document.getElementById("nuevoComentario").value = "";
+  document.getElementById("puntuacion").value = "5";
+});
+
+// === Redirigir a producto relacionado ===
+function setProductID(id) {
+  localStorage.setItem("productID", id);
+  window.location = "product-info.html";
+}
