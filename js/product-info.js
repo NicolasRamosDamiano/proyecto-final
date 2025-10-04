@@ -44,15 +44,15 @@ fetch(URL_PRODUCT)
       .map(img => `<img src="${img}" class="thumb" alt="Miniatura" onclick="updateMainImage('${img}')">`)
       .join("");
 
-    // Productos relacionados (3 o 4)
+    // Productos recomendados
     containerRecomendados.innerHTML = product.relatedProducts
-      .slice(0, 4)
+      .slice(0, 2)
       .map(p => `
-        <div class="col mb-5 col-sm-6 col-md-4 col-lg-3">
+        <div class="col mb-5">
           <div class="card h-100 shadow-sm" onclick="setProductID(${p.id})" style="cursor:pointer;">
             <img class="card-img-top" src="${p.image}" alt="${p.name}">
             <div class="card-body p-3 text-center">
-              <h6 class="fw-bold">${p.name}</h6>
+              <h6 class="fw-bolder fs-6">${p.name}</h6>
             </div>
           </div>
         </div>
@@ -137,3 +137,4 @@ function setProductID(id) {
   localStorage.setItem("productID", id);
   window.location = "product-info.html";
 }
+
