@@ -111,7 +111,7 @@ function mostrarComentarios() {
 document.getElementById("btnComentar").addEventListener("click", () => {
   const texto = document.getElementById("nuevoComentario").value.trim();
   const puntuacion = parseInt(document.getElementById("puntuacion").value);
-  const usuario = localStorage.getItem("usuario") || "Usuario anónimo";
+  const usuario = localStorage.getItem("currentUser") || "Usuario anónimo";
 
   if (!texto) {
     alert("Por favor escribe un comentario antes de enviarlo.");
