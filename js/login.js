@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
     const boton = document.querySelector('.boton');
 
