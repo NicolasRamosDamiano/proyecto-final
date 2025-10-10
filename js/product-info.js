@@ -40,7 +40,7 @@ fetch(URL_PRODUCT)
     promedioTexto.innerHTML = `<p class="text-muted">Cargando puntuación...</p>`;
 
     // Miniaturas
- ProductosRelacionados-ProductInfo
+ 
     productThumbs.innerHTML = product.images
       .map(img => `<img src="${img}" class="thumb" alt="Miniatura" onclick="updateMainImage('${img}')">`)
       .join("");
