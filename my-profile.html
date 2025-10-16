@@ -26,44 +26,70 @@
   </style>
 </head>
 
+
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
-          </li>
-        </ul>
+ <div class="container">
+    <div class="profile-card p-4 text-center">
+      <h2 class="mb-4 text-primary">Perfil del Usuario</h2>
+
+      <!-- Imagen de perfil -->
+      <div class="img-container mb-3">
+        <img id="profileImage" src="https://via.placeholder.com/150" alt="Foto de perfil" class="profile-img">
+        <label for="imageUpload" class="upload-btn">
+          <i class="bi bi-camera-fill"></i>
+        </label>
+        <input type="file" id="imageUpload" accept="image/*" class="d-none">
       </div>
+
+      <!-- Campos del perfil -->
+      <form id="profileForm" class="text-start">
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="nombre" placeholder="Ingresa tu nombre">
+        </div>
+        <div class="mb-3">
+          <label for="apellido" class="form-label">Apellido</label>
+          <input type="text" class="form-control" id="apellido" placeholder="Ingresa tu apellido">
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="ejemplo@correo.com">
+        </div>
+        <div class="mb-3">
+          <label for="telefono" class="form-label">Teléfono de Contacto</label>
+          <input type="tel" class="form-control" id="telefono" placeholder="Ingresa tu teléfono">
+        </div>
+
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        </div>
+      </form>
     </div>
-  </nav>
-  <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
-    </div>
-  </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
-    </div>
+  </div>
+
+  <!-- Bootstrap JS + Iconos -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.js"></script>
+
+  <!-- Script para actualizar foto -->
+  <script>
+    const imageUpload = document.getElementById("imageUpload");
+    const profileImage = document.getElementById("profileImage");
+
+    imageUpload.addEventListener("change", (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = e => {
+          profileImage.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+
+</body>
+</html>
   </footer>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
