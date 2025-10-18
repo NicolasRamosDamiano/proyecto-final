@@ -40,3 +40,23 @@ clearDataBtn.addEventListener("click", () => {
     alert(" Datos borrados correctamente");
   }
 });
+
+
+
+// Manejar carga de imagen
+imageUpload.addEventListener("change", function () {
+  const file = this.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      profileImage.src = e.target.result;
+
+      // Guardar la imagen en localStorage junto con los demás datos
+      const savedData = JSON.parse(localStorage.getItem("userProfile")) || {};
+      savedData.foto = e.target.result;
+      localStorage.setItem("userProfile", JSON.stringify(savedData));
+    };
+    reader.readAsDataURL(file); // Convierte la imagen a Base64
+  }
+});
+

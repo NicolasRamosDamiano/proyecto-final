@@ -207,7 +207,7 @@ a.custom-card:hover {
       margin-right: 200px;
 
     }
-    #navbar1 {
+ #navbar1 {
   background-color: #ffe600;
   font-weight: 600;
 }
@@ -225,3 +225,51 @@ a.custom-card:hover {
 #navbar1 .nav-link:hover {
   color: #555 !important;
 }
+.profile-pic-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-pic-container {
+  position: relative;
+  width: 50px;
+  height: 50px;
+}
+
+.profile-img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #0d6efd;
+  transition: transform 0.3s ease;
+}
+
+
+.upload-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-pic-container:hover .upload-overlay {
+  opacity: 1;
+}
+
+.upload-icon {
+  color: white;
+  font-size: 20px;
+  background-color: rgba(13, 110, 253, 0.85);
+  padding: 6px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
