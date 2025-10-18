@@ -272,3 +272,21 @@ footer p {
 .controls button:active {
   transform: scale(0.95);
 }
+#navbar1 {
+  background-color: #ffe600;
+  font-weight: 600;
+}
+
+#navbar1 a.navbar-brand {
+  color: #000 !important;
+  font-size: 1.4rem;
+}
+
+#navbar1 .nav-link {
+  color: #000 !important;
+  transition: color 0.2s ease;
+}
+
+#navbar1 .nav-link:hover {
+  color: #555 !important;
+}
