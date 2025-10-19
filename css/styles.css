@@ -5,13 +5,6 @@
   font-family: 'Verdana', serif !important;
 }
 
-.jumbotron .display-4 {
-  font-weight: bold;
-}
-
-nav a {
-  text-decoration: none;
-}
 
 .bd-placeholder-img {
   font-size: 1.125rem;
@@ -179,34 +172,7 @@ main {
   min-height: calc(100vh - 210px);
 }
 
-a.custom-card,
-a.custom-card:hover {
-  color: inherit;
-  text-decoration: inherit;
-}
 
-.checked {
-  color: orange;
-}
-
-    #logout {
-      background-color: #ff0;
-      margin-left: 10px;
-      color: rgb(0, 0, 0);
-      cursor: pointer;
-      position: absolute;
-      top: 12px;
-      right: 20px;
-    }
-    #logout:hover{
-      background-color: #f0a503;
-    }
-
-    #usuario{
-      color: #fff;
-      margin-right: 200px;
-
-    }
  #navbar1 {
   background-color: #ffe600;
   font-weight: 600;
@@ -242,7 +208,7 @@ a.custom-card:hover {
   height: 150px;
   object-fit: cover;
   border-radius: 50%;
-  border: 3px solid #0d6efd;
+  border: 3px solid #707a8a;
   transition: transform 0.3s ease;
 }
 
@@ -272,4 +238,3 @@ a.custom-card:hover {
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
-
