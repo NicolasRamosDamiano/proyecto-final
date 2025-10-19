@@ -9,9 +9,11 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/botonclarooscuro.css">
 </head>
 
 <body>
+
    <nav class="navbar navbar-expand-lg navbar-light" id="navbar1">
     <div class="container px-4 px-lg-5">
       <a class="navbar-brand" href="#!">CompraFácilUY</a>
@@ -30,6 +32,21 @@
        <div class="d-flex align-items-center gap-3">
         <span id="usuario" class="navbar-text fw-semibold text-primary"></span>
       </div>  
+          <a class="nav-link" href="my-profile.html">
+            <i class="bi bi-person-circle"></i> Mi perfil
+          </a>
+         <button id="boton-tema" aria-label="Cambiar tema"></button>
+        </li>
+      </ul>   
+          
+        </ul>
+        <form class="d-flex">
+          <button class="btn btn-outline-dark" type="button">
+            <i class="fa-solid fa-cart-shopping"></i>
+            Carrito
+            <span id="cart-count" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+          </button>
+        </form>
       </div>
     </div>
    </nav>
@@ -88,6 +105,7 @@
   <script src="js/index.js"></script>
   <script src="js/init.js"></script>
   <script src="js/verify.js"></script>
+  <script src="js/botonclarooscuro.js"></script>
   
 </body>
 

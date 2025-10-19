@@ -179,17 +179,17 @@ main {
 }
 
 #navbar1 a.navbar-brand {
-  color: #000 !important;
+  color: #000 ;
   font-size: 1.4rem;
 }
 
 #navbar1 .nav-link {
-  color: #000 !important;
+  color: #000 ;
   transition: color 0.2s ease;
 }
 
 #navbar1 .nav-link:hover {
-  color: #555 !important;
+  color: #555 ;
 }
 .profile-pic-wrapper {
   display: flex;
