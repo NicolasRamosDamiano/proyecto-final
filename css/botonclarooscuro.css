@@ -48,10 +48,13 @@ body {
   background-color: var(--color-fondo) !important;
   color: var(--color-texto) !important;
 }
-.productos p {
+.producto.card {
+  background-color: var(--color-fondo) !important;
   color: var(--color-texto) !important;
 }
-.productos h2 {
+
+.card {
+  background-color: var(--color-fondo) !important;
   color: var(--color-texto) !important;
 }
 
@@ -66,4 +69,8 @@ footer {
 button {
   background-color: var(--color-boton) !important;
   color: var(--color-boton-texto) !important;
+}
+
+.navbar-brand {
+  color: var(--color-navbar-texto) !important;
 }
