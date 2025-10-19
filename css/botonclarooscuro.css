@@ -1,0 +1,69 @@
+:root {
+  --color-fondo: #ffffff;
+  --color-texto: #000000;
+  --color-boton: #fde10b;
+  --color-boton-texto: #000000;
+  --color-navbar-fondo: #f9bd09;
+  --color-navbar-texto: #000000;
+  --color-navbar-texto-activo: #000707;
+}
+html[data-tema="oscuro"] {
+  --color-fondo: #1e1e1e;
+  --color-texto: #ffffff;
+  --color-boton: #0a0701;
+  --color-boton-texto: #ffffff;
+  --color-navbar-fondo: #212529;
+  --color-navbar-texto: #ffffff;
+  --color-navbar-texto-activo: #f7fafb;
+}
+body {
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  transition: background-color 0.3s, color 0.3s;
+}
+#boton-tema {
+  position: fixed;
+  bottom: 1rem;
+  right: 4px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--color-boton);
+  color: var(--color-boton-texto);
+  z-index: 9999;
+}
+.navbar {
+  background-color: var(--color-navbar-fondo) !important;
+}
+
+.navbar .nav-link {
+  color: var(--color-navbar-texto) !important;
+}
+
+.navbar .nav-link.active {
+  color: var(--color-navbar-texto-activo) !important;
+}
+
+.productos {
+  background-color: var(--color-fondo) !important;
+  color: var(--color-texto) !important;
+}
+.productos p {
+  color: var(--color-texto) !important;
+}
+.productos h2 {
+  color: var(--color-texto) !important;
+}
+
+.producto.card {
+  background-color: var(--color-fondo) !important;
+  color: var(--color-texto) !important;}
+
+footer {
+  background-color: var(--color-navbar-fondo) !important;
+  color: var(--color-navbar-texto) !important;
+}
+button {
+  background-color: var(--color-boton) !important;
+  color: var(--color-boton-texto) !important;
+}
