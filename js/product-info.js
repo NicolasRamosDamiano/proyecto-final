@@ -140,3 +140,43 @@ function setProductID(id) {
 }
 
 
+//BTN COMPRAR
+// DOM
+document.addEventListener("DOMContentLoaded", () => {
+
+  const btnComprar = document.querySelector(".btn.btn-outline-dark.flex-shrink-0");
+  const nombre = document.getElementById("product-name");
+  const precio = document.getElementById("product-price");
+  const imagen = document.getElementById("product-img");
+  const cantidad = document.getElementById("inputQuantity");
+
+  // Se añade el evento al botón comprar y se crea el objeto "producto"
+  btnComprar.addEventListener("click", () => {
+    const producto = {
+      name: nombre.textContent.trim(),
+      price: precio.textContent.trim(),
+      image: imagen.src,
+      quantity: parseInt(cantidad.value) || 1,
+    };
+
+    // Usamos getItem para obtener los productos y su información del localStorage 
+    let cart = JSON.parse(localStorage.getItem("cartProducts")) || [];
+
+    // Verificar si el producto ya está en el carrito
+    const existingProduct = cart.find(p => p.name === producto.name);
+    if (existingProduct) {
+      existingProduct.quantity += producto.quantity;
+    } else {
+      cart.push(producto);
+    }
+
+    // Guardar el carrito actualizado
+    localStorage.setItem("cartProducts", JSON.stringify(cart));
+
+    // Redirigir al carrito
+    window.location.href = "cart.html";
+  });
+});
+
+
+
