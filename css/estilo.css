@@ -32,7 +32,7 @@ border: 1px solid #ffffff;
 border-radius: 10px;
 box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 padding: 15px;
-background: linear-gradient(to bottom, #f9f09c, rgb(249, 237, 71));
+background: linear-gradient(to bottom, #f9f09c, rgb(245, 229, 5));
 overflow: hidden;
 transition: transform 0.3s ease;
 box-shadow: 0.4s ease ;
