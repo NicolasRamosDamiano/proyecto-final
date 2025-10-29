@@ -91,7 +91,7 @@ function mostrarComentarios() {
   ratingContainer.innerHTML = comentarios
     .map(c => `
       <div class="comment mb-3 p-3 border rounded bg-light">
-        <p><strong>${c.user}</strong> - <span class="text-muted">${c.dateTime}</span></p>
+        <p><strong id="p-comentario">${c.user}</strong> - <span class="text-muted">${c.dateTime}</span></p>
         <div>${renderStars(c.score)}</div>
         <p class="mt-2">${c.description}</p>
       </div>
