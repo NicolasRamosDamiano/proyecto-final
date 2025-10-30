@@ -1,35 +1,43 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const cartContainer = document.getElementById('productos-comprados');
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+const cartContainer = document.getElementById('productos-comprados');
+const cartItems = JSON.parse(localStorage.getItem('cartProducts')) || [];
 
-    if (cartItems.length === 0) {
-        // Si no hay productos en el carrito, muestra un mensaje de vacío
-        cartContainer.innerHTML = `
-            <div class="empty-cart-message">
-                <p>Tu carrito está vacío</p>
-                <p>No hay productos agregados al carrito</p>
-            </div>
-        `;
-    } else {
-        // Si existen productos, los muestra en pantalla
-        displayCartItems(cartItems);
-    }
-});
-
-function displayCartItems(items) {
-    const cartContainer = document.getElementById('cart-container');
-    cartContainer.innerHTML = items.map(item => `
-        <div class="cart-item">
-            <h3>${item.name}</h3>
-            <p>Precio: $${item.price}</p>
-            <p>Cantidad: ${item.quantity}</p>
-        </div>
-    `).join('');
+function totalProducto(price, quantity) {
+  const precio = parseFloat(price.replace(/[^0-9.]/g, "")) || 0;
+  const cantidad = parseInt(quantity) || 0;
+  return (precio * cantidad).toFixed(2);
 }
 
+function mostrarCarrito() {
+    cartItems.forEach(producto => {
+        const card = document.createElement("div");
+        card.classList.add("producto1");
+
+        card.innerHTML = `
+            <img src="${producto.image}" alt="${producto.name}" class="producto-img">
+            <h3 class="producto-nombre">${producto.name}</h3>
+            <p class="producto-precio">
+            <strong>Cantidad:</strong>${producto.quantity}  <strong>Precio $${totalProducto(producto.price, producto.quantity)}</strong>
+            </p>
+            <button class="btn btn-danger btn-sm eliminar-btn">Eliminar</button>
+        `;
+
+        cartContainer.appendChild(card);
+    });
+}
+
+mostrarCarrito();
 
 
+//calcular el total del carrito*//
+function calcularTotalCarrito() {
+  const total = cartItems.reduce((acc, producto) => {
+    const precio = parseFloat(producto.price.replace(/[^0-9.]/g, "")) || 0;
+    const cantidad = parseInt(producto.quantity) || 0;
+    return acc + (precio * cantidad);
+  }, 0);
 
-const total = document.getElementById('cart-total');
-
-
+  const totalElemento = document.getElementById("cart-total").textContent = total.toFixed(2);
+  totalElemento.innerHTML = `<strong>Total a pagar:</strong> $${total.toFixed(2)}`;
+  cartContainer.appendChild(totalElemento);
+}
+calcularTotalCarrito();
