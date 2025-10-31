@@ -6,8 +6,8 @@
   --color-navbar-fondo: #f9bd09;
   --color-navbar-texto: #000000;
   --color-navbar-texto-activo: #000707;
-  --color-producto-fondo: #f1c102;
-  --color-producto-fondo2: #f1eed8;
+  --color-producto-fondo: #f5d657;
+  --color-producto-fondo2: #ff9d00;
   --color-ventas: #080000;
 }
 html[data-tema="oscuro"] {
@@ -18,8 +18,8 @@ html[data-tema="oscuro"] {
   --color-navbar-fondo: #212529;
   --color-navbar-texto: #ffffff;
   --color-navbar-texto-activo: #f7fafb;
-  --color-producto-fondo: #2c2c2c;
-  --color-producto-fondo2: #ffffff;
+  --color-producto-fondo: #0b0a0a;
+  --color-producto-fondo2: #ebe8e8;
   --color-ventas: #181313;
   --colorjjj: #110c0c;
 
@@ -125,4 +125,16 @@ background: linear-gradient(to bottom,var(--color-producto-fondo), var(--color-p
 
 #p-comentario{
   color: var(--color-texto) !important;
+}
+
+.producto1{
+background: linear-gradient(to bottom,var(--color-producto-fondo), var(--color-producto-fondo2)) !important;
+  color: var(--colorjjj) !important;
+}
+
+.total{
+  color: var(--color-texto) !important;
+}
+.producto-descripcion{
+  color: var(--colorjjj) !important;
 }

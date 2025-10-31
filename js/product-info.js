@@ -174,8 +174,7 @@ const productId = localStorage.getItem("productID");
     // Guardar el carrito actualizado
     localStorage.setItem("cartProducts", JSON.stringify(cart));
 
-    // Redirigir al carrito
-    window.location.href = "cart.html";
+
   });
 });
 

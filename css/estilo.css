@@ -20,19 +20,18 @@ grid-template-columns: repeat(3, 1fr);
 gap: 80px;
 align-items: center;
 justify-content: center;
-background-color: rgb(255, 255, 255);
+
 }
 
 .producto {
 margin-top: 20px;
 align-items: center;
 text-align: center;
-height: 375px;
+height: 450px;
 border: 1px solid #ffffff;
 border-radius: 10px;
 box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 padding: 15px;
-background: linear-gradient(to bottom, #f9f09c, rgb(245, 229, 5));
 overflow: hidden;
 transition: transform 0.3s ease;
 box-shadow: 0.4s ease ;
@@ -83,7 +82,7 @@ font-family: Roboto;
 
 .producto-vendidos {
 font-size: 14px;
-color: #999;
+
 }
 
 *{
@@ -108,8 +107,7 @@ color: #999;
 
 header{ 
     height: 100%;
-    width: 100%;
-    background-color: #ffff00;   
+    width: 100%;  
     justify-content: center;
     margin-top: 0%;  
 }
@@ -118,7 +116,6 @@ footer{
     text-align: center;
     height: 100%;
     width: 100%;
-    background-color: #ffff00;   
     justify-content: center;
     margin-top: 0%;  
 }
@@ -134,7 +131,6 @@ footer{
     display: inline-block;
     font-size: 13px;
     color: #000000;
-    background-color: rgb(202, 202, 202);
     padding: 10px 15px;
     text-decoration: none;
     border: 0.5px solid rgb(255, 255, 255);
@@ -220,7 +216,6 @@ footer p {
 }
 
 #busca {
-    background-color: rgb(255, 243, 243);
     border-radius: 10px;
     width: 350px;
     cursor: pointer;
@@ -233,7 +228,6 @@ footer p {
   justify-content: center;
   margin: 20px auto;
   padding: 15px;
-  background: #fff8dc;
   border: 2px solid #f1c40f;
   border-radius: 12px;
   max-width: 600px;
@@ -257,7 +251,6 @@ footer p {
   padding: 8px 15px;
   border: none;
   border-radius: 8px;
-  background: #f1c40f;
   color: #333;
   font-weight: bold;
   cursor: pointer;
@@ -265,7 +258,6 @@ footer p {
 }
 
 .controls button:hover {
-  background: #f39c12;
   color: #fff;
 }
 
@@ -273,7 +265,6 @@ footer p {
   transform: scale(0.95);
 }
 #navbar1 {
-  background-color: #ffe600;
   font-weight: 600;
 }
 
