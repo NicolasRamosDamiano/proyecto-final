@@ -149,10 +149,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const precio = document.getElementById("product-price");
   const imagen = document.getElementById("product-img");
   const cantidad = document.getElementById("inputQuantity");
-
+const productId = localStorage.getItem("productID");
   // Se añade el evento al botón comprar y se crea el objeto "producto"
   btnComprar.addEventListener("click", () => {
     const producto = {
+      id: productId,
       name: nombre.textContent.trim(),
       price: precio.textContent.trim(),
       image: imagen.src,
@@ -173,8 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Guardar el carrito actualizado
     localStorage.setItem("cartProducts", JSON.stringify(cart));
 
-    // Redirigir al carrito
-    window.location.href = "cart.html";
+
   });
 });
 
