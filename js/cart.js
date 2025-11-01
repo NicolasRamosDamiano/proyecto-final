@@ -27,8 +27,6 @@ function mostrarCarrito() {
 
 mostrarCarrito();
 
-
-//calcular el total del carrito*//
 function calcularTotalCarrito() {
   const total = cartItems.reduce((acc, producto) => {
     const precio = parseFloat(producto.price.replace(/[^0-9.]/g, "")) || 0;
@@ -36,8 +34,7 @@ function calcularTotalCarrito() {
     return acc + (precio * cantidad);
   }, 0);
 
-  const totalElemento = document.getElementById("cart-total").textContent = total.toFixed(2);
+  const totalElemento = document.getElementById("cart-total");
   totalElemento.innerHTML = `<strong>Total a pagar:</strong> $${total.toFixed(2)}`;
-  cartContainer.appendChild(totalElemento);
 }
 calcularTotalCarrito();

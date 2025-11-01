@@ -186,7 +186,6 @@ section.py-5 {
 
 /* === FOOTER === */
 footer {
-  background-color: #ffe600;
   padding: 15px 0;
   text-align: center;
   font-size: 0.9rem;
@@ -243,7 +242,6 @@ footer a:hover {
 .upload-icon {
   color: white;
   font-size: 20px;
-  background-color: rgba(13, 110, 253, 0.85);
   padding: 6px;
   border-radius: 50%;
   cursor: pointer;
