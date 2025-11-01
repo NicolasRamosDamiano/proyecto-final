@@ -1,18 +1,19 @@
-
 document.addEventListener("DOMContentLoaded", () => {
-    const boton = document.querySelector('.boton');
-
+    const boton = document.querySelector('.boton'); 
     boton.addEventListener("click", () => {
-        const usuario = document.getElementById('usuario').value;
+        const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
 
-        if(usuario === "" || password === "") {
+        if(email === "" || password === "") {
             alert("Por favor complete todos los campos");
             return;
         }
         localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("currentUser", usuario);
+        localStorage.setItem("userEmail", email);
         
         window.location.href = 'index.html';
     });
 });
+
+
+ 
