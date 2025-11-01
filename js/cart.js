@@ -8,6 +8,15 @@ function totalProducto(price, quantity) {
 }
 
 function mostrarCarrito() {
+
+  if (!cartItems || cartItems.length === 0) {
+  cartContainer.innerHTML = `
+    <div class="carrito-vacio" style="padding:20px;text-align:center;">
+      <p><strong>Tu carrito está vacío</strong></p>
+      <p>carente de productos en su interior que lo llenen, impidiendole cumplir su propósito.</p>
+    </div>
+  `;
+}
     cartItems.forEach(producto => {
         const card = document.createElement("div");
         card.classList.add("producto1");
