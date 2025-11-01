@@ -56,7 +56,7 @@ body, html {
   color: hsl(0, 17%, 85%);
 }
 
-input[type="text"],
+input[type="email"],
 input[type="password"] {
   width: 100%;
   padding: 10px 35px;
