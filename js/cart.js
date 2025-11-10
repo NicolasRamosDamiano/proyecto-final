@@ -7,6 +7,28 @@ function totalProducto(price, quantity) {
   return (precio * cantidad).toFixed(2);
 }
 
+function eliminarUnidad(productoId) {
+    const index = cartItems.findIndex(item => item.id === productoId);
+    
+    if (index !== -1) {
+        if (cartItems[index].quantity > 1) {
+            // Reduce la cantidad en 1
+            cartItems[index].quantity--;
+        } else {
+            // Si solo queda 1 unidad, elimina el producto completamente
+            cartItems.splice(index, 1);
+        }
+        
+        // Actualiza el localStorage
+        localStorage.setItem('cartProducts', JSON.stringify(cartItems));
+        
+        // Actualiza la visualización
+        cartContainer.innerHTML = '';
+        mostrarCarrito();
+        calcularTotalCarrito();
+    }
+}
+
 function mostrarCarrito() {
 
   if (!cartItems || cartItems.length === 0) {
@@ -16,6 +38,7 @@ function mostrarCarrito() {
       <p>carente de productos en su interior que lo llenen, impidiendole cumplir su propósito.</p>
     </div>
   `;
+  return;
 }
     cartItems.forEach(producto => {
         const card = document.createElement("div");
@@ -25,12 +48,19 @@ function mostrarCarrito() {
             <img src="${producto.image}" alt="${producto.name}" class="producto-img">
             <h3 class="producto-nombre">${producto.name}</h3>
             <p class="producto-precio">
-            <strong>Cantidad:</strong>${producto.quantity}  <strong>Precio $${totalProducto(producto.price, producto.quantity)}</strong>
+                <strong>Cantidad:</strong>${producto.quantity}  <strong>Precio $${totalProducto(producto.price, producto.quantity)}</strong>
             </p>
-            <button class="btn btn-danger btn-sm eliminar-btn">Eliminar</button>
+            <button class="btn btn-danger btn-sm eliminar-unidad" data-id="${producto.id}">Eliminar</button>
+            
         `;
 
         cartContainer.appendChild(card);
+        
+        // Agregar event listener para el botón de eliminar unidad
+        const btnEliminarUnidad = card.querySelector('.eliminar-unidad');
+        btnEliminarUnidad.addEventListener('click', () => {
+            eliminarUnidad(producto.id);
+        });
     });
 }
 
@@ -50,3 +80,5 @@ function calcularTotalCarrito() {
   cartContainer.appendChild(totalElemento);
 }
 calcularTotalCarrito();
+
+
