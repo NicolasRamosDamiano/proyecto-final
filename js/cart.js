@@ -104,3 +104,48 @@ function mostrarMensaje(texto, tipo) {
   mensajeCompra.style.display = "block";
   setTimeout(() => mensajeCompra.style.display = "none", 4000);
 }
+// SECCIÓN DE COSTOS 
+
+// Calcula el subtotal total del carrito
+function calcularSubtotal() {
+  return cartItems.reduce((acc, producto) => {
+    const precio = parseFloat(producto.price.replace(/[^0-9.]/g, "")) || 0; 
+    const cantidad = parseInt(producto.quantity) || 0;
+    return acc + (precio * cantidad);
+  }, 0);
+}
+//replace(/[^0-9.]/g, ""//
+// Usa una expresión regular (regex) para eliminar todo lo que no sea un número o punto decimal
+//[^0-9.] = “cualquier carácter que no sea número (0–9) o punto (.)”//
+//g = “buscar en toda la cadena, no solo la primera coincidencia”// 
+
+// Calcula el costo de envío según el tipo seleccionado
+function calcularEnvio() {
+  const envioSeleccionado = document.querySelector('input[name="envio"]:checked');
+  const subtotal = calcularSubtotal();
+  if (!envioSeleccionado) return 0;
+
+  if (envioSeleccionado.value === "estandar") {
+    return subtotal * 0.05; 
+  } else if (envioSeleccionado.value === "express") {
+    return subtotal * 0.10; 
+  }
+  return 0;
+}
+
+// Actualiza los valores de costos en pantalla
+function actualizarCostos() {
+  const subtotal = calcularSubtotal();
+  const costoEnvio = calcularEnvio();
+  const totalFinal = subtotal + costoEnvio;
+
+  document.getElementById("subtotal").textContent = subtotal.toFixed(2);
+  document.getElementById("costo-envio").textContent = costoEnvio.toFixed(2);
+  document.getElementById("total-final").textContent = totalFinal.toFixed(2);
+  document.getElementById("cart-total").innerHTML = `<strong>Total a pagar:</strong> $${totalFinal.toFixed(2)}`;
+}
+
+// Escucha los cambios en el tipo de envío y actualiza los costos
+document.querySelectorAll('input[name="envio"]').forEach(radio => {
+  radio.addEventListener("change", actualizarCostos);
+});
