@@ -1,5 +1,7 @@
 const cartContainer = document.getElementById('productos-comprados');
 const cartItems = JSON.parse(localStorage.getItem('cartProducts')) || [];
+const finalizarBtn = document.getElementById("boton-compra-finalizar");
+const mensajeCompra = document.getElementById("mensaje-compra");
 
 function totalProducto(price, quantity) {
   const precio = parseFloat(price.replace(/[^0-9.]/g, "")) || 0;
@@ -47,3 +49,58 @@ function calcularTotalCarrito() {
   totalElemento.innerHTML = `<strong>Total a pagar:</strong> $${total.toFixed(2)}`;
 }
 calcularTotalCarrito();
+
+
+
+// === Validaciones y botón "Finalizar compra" ===
+
+finalizarBtn.addEventListener("click", () => {
+  const direccion = document.getElementById("direccion").value.trim();
+  const envioSeleccionado = document.querySelector('input[name="envio"]:checked');
+  const formaPago = document.getElementById("formaPago").value;
+
+  // Validar dirección
+  if (direccion === "") {
+    mostrarMensaje("Debes ingresar una dirección.", "danger");
+    return;
+  }
+
+  // Validar envío
+  if (!envioSeleccionado) {
+    mostrarMensaje("Debes seleccionar una forma de envío.", "danger");
+    return;
+  }
+
+  // Validar carrito
+  if (cartItems.length === 0) {
+    mostrarMensaje("Tu carrito está vacío.", "danger");
+    return;
+  }
+
+  if (cartItems.some(p => !p.quantity || p.quantity <= 0)) {
+    mostrarMensaje("La cantidad de cada producto debe ser mayor a 0.", "danger");
+    return;
+  }
+
+  // Validar forma de pago
+  if (formaPago === "") {
+    mostrarMensaje("Debes seleccionar una forma de pago.", "danger");
+    return;
+  }
+
+  //  Si todo está correcto
+  mostrarMensaje("✅ ¡Compra finalizada con éxito! Gracias por tu compra.", "success");
+
+  // Vaciar carrito simulado
+  localStorage.removeItem("cartProducts");
+  cartContainer.innerHTML = "";
+  document.getElementById("cart-total").innerHTML = "$0.00";
+});
+
+// Mostrar mensaje temporal
+function mostrarMensaje(texto, tipo) {
+  mensajeCompra.textContent = texto;
+  mensajeCompra.className = `alert alert-${tipo}`;
+  mensajeCompra.style.display = "block";
+  setTimeout(() => mensajeCompra.style.display = "none", 4000);
+}
