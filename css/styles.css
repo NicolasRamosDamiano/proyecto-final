@@ -1,3 +1,6 @@
+/*================================================================
+  SECCIÓN 1: TIPOGRAFÍAS, ESTILOS BASE, AJUSTES, MEDIA QUERY BASE
+  ================================================================ */
 .jumbotron,
 .card-body,
 .container,
@@ -9,9 +12,6 @@
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -21,6 +21,9 @@
   }
 }
 
+/*================================================================
+                SECCIÓN 2: JUMBOTRON / HEADER PRINCIPAL
+  ================================================================ */
 .jumbotron {
   height: 50vh;
   padding: 5em inherit;
@@ -41,14 +44,6 @@
   }
 }
 
-.jumbotron p:last-child {
-  margin-bottom: 0;
-}
-
-.jumbotron-heading {
-  font-weight: 300;
-}
-
 .jumbotron .container {
   max-width: 40rem;
   background-color: rgba(255, 255, 255, 0.5);
@@ -56,124 +51,33 @@
   text-shadow: 1px 1px 2px grey;
 }
 
-.jumbotron .lead {
+
+
+.jumbotron.lead {
   font-size: 38px;
 }
 
+/*================================================================
+                      SECCIÓN 3: FOOTER
+  ================================================================ */
+
 footer {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding: 15px 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #000;
 }
 
-footer p {
-  margin-bottom: .25rem;
+footer a {
+  color: #0056b3;
+  text-decoration: none;
 }
 
-.site-header a {
-  color: white;
-  transition: ease-in-out color .15s;
-}
+/*================================================================
+                      SECCIÓN 4: NAVBAR
+  ================================================================ */
 
-.site-header .dropdown-menu a {
-  color: black;
-}
-
-.dropzone {
-  border: 2px dashed #0087F7;
-  border-radius: 5px;
-  background: white;
-}
-
-.img-fit {
-  max-height: 100%;
-}
-
-.alert {
-  position: fixed;
-  top: 80px;
-  width: 50%;
-  left: 50%;
-  transform: translate(-50%, 0);
-}
-
-.lds-ring {
-  display: inline-block;
-  position: relative;
-  width: 64px;
-  height: 64px;
-  top: 50%;
-  left: 50%;
-}
-
-.cursor-active {
-  cursor: pointer;
-}
-
-.left {
-  float: left;
-  padding: 4px;
-  background-color: rgba(255, 255, 255, 0.5);
-}
-
-.lds-ring div {
-  box-sizing: border-box;
-  display: block;
-  position: absolute;
-  width: 51px;
-  height: 51px;
-  margin: 6px;
-  border: 6px solid #fff;
-  border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #fff transparent transparent transparent;
-}
-
-.lds-ring div:nth-child(1) {
-  animation-delay: -0.45s;
-}
-
-.lds-ring div:nth-child(2) {
-  animation-delay: -0.3s;
-}
-
-.lds-ring div:nth-child(3) {
-  animation-delay: -0.15s;
-}
-
-@keyframes lds-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.signin {
-  width: 100%;
-  max-width: 330px;
-  padding: 15px;
-  margin: auto;
-}
-
-#spinner-wrapper {
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1021;
-  display: none;
-}
-
-main {
-  min-height: calc(100vh - 210px);
-}
-
-
- #navbar1 {
+#navbar1 {
   background-color: #ffe600;
   font-weight: 600;
 }
@@ -191,6 +95,89 @@ main {
 #navbar1 .nav-link:hover {
   color: #555 ;
 }
+
+/*================================================================
+                  SECCIÓN 5: IMÁGENES Y AJUSTES
+  ================================================================ */
+.img-fit{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 8px;
+}
+
+.cursor-active{ 
+  cursor: pointer; 
+}
+
+
+
+/*================================================================
+                  SECCIÓN 6: SPINNER / LOADER
+  ================================================================ */
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+  top: 50%;
+  left: 50%;
+}
+
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 51px;
+  height: 51px;
+  margin: 6px;
+  border: 6px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fff transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1){ animation-delay: -0.45s;}
+.lds-ring div:nth-child(2){ animation-delay: -0.3s;}
+.lds-ring div:nth-child(3){ animation-delay: -0.15s;}
+
+@keyframes lds-ring {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#spinner-wrapper {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1021;
+  display: none;
+}
+
+/*================================================================
+                SECCIÓN 7: FORMULARIOS DE LOGIN / SIGNIN
+  ================================================================ */
+.signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+/*================================================================
+              SECCIÓN 8: CONTENEDOR PRINCIPAL DE LA PÁGINA
+  ================================================================ */
+main {
+  min-height: calc(100vh - 210px);
+}
+
+/*================================================================
+            SECCIÓN 9: PERFIL DE USUARIO (IMAGEN + OVERLAY)
+  ================================================================ */
 .profile-pic-wrapper {
   display: flex;
   justify-content: center;
@@ -211,7 +198,6 @@ main {
   border: 3px solid #707a8a;
   transition: transform 0.3s ease;
 }
-
 
 .upload-overlay {
   position: absolute;
@@ -239,6 +225,9 @@ main {
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
+/*================================================================
+            SECCIÓN 10: GRID DE PRODUCTOS COMPRADOS
+  ================================================================ */
 .productos-comprados1{
   max-width: 99% ;
   max-height: 99%;
@@ -250,12 +239,14 @@ display: grid;
 grid-template-columns: repeat(3, 1fr);
 gap: 20px;
 }
+
 .productos-comprados1 img{
   width: 200px;
   height: 200px;
   margin-top: 10px;
   border-radius: 20px;
 }
+
 .producto1{
   border: 2px solid black;
   margin: 10px;
@@ -267,6 +258,10 @@ min-height: 350PX;
 min-width: 350PX;
 border-radius: 20px;
 }
+
+/*================================================================
+            SECCIÓN 11: BADGE DEL CARRITO / TOTAL COMPRA
+  ================================================================ */
 
 .cart-badget {
   position: fixed;
@@ -303,21 +298,18 @@ border-radius: 20px;
   margin: 0;
 }
 
+/*================================================================
+            SECCIÓN 12: MEDIA QUERIES (RESPONSIVE)
+  ================================================================ */
 @media (max-width: 1400px) {
   .productos-comprados1 {
     grid-template-columns: repeat(3, 1fr);
-    align-items: center;
-    justify-content: center;
-
   }
 }
 
 @media (max-width: 1100px) {
   .productos-comprados1 {
     grid-template-columns: repeat(2, 1fr);
-    align-items: center;
-    justify-content: center;
-
   }
 }
 
@@ -326,9 +318,11 @@ border-radius: 20px;
     position: static;
     margin: 10px;
   }
+
   .productos-comprados1 {
     grid-template-columns: repeat(1, 1fr);
-        align-items: center;
-    justify-content: center;
   }
 }
+
+
+/* SECCIÓN 5: float: left: anticuado se reemplaza por object-fit para que todas las imágenes queden iguales y modernas.
