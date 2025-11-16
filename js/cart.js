@@ -16,7 +16,7 @@ const envioRadios = document.querySelectorAll('input[name="tipoEnvio"]');
 // ===============================================
 
 function totalProducto(price, quantity) {
-  const precio = parseFloat(String(price).replace(/[^0-9.]/g, "")) || 0;
+  const precio = parseFloat(String(price).replace(/[^0-9.]/g, "")) || 0;//con esta función se elimina todo lo que no es número
   const cantidad = parseInt(quantity) || 0;
   return (precio * cantidad).toFixed(2);
 }
@@ -68,7 +68,9 @@ function mostrarCarrito() {
     `;
 
     cartContainer.appendChild(card);
-  });
+  });//Verifica si existe el contenedor, i el carrito está vacío: muestra mensaje y borra los totales, si tiene productos los muestra
+
+
 
   // Evento de eliminar
   document.querySelectorAll(".btn-delete").forEach(btn => {
@@ -82,7 +84,10 @@ function mostrarCarrito() {
 
   calcularTotales();
 }
-
+//funcionalidad de este evento: Cuando se hace clic en un botón:Se obtiene el número (índice) del producto, que viene guardado dentro del atributo data-index del botón.
+//Con ese índice, se quita ese producto del array del carrito usando splice().
+//Después de eliminarlo, se guarda el carrito actualizado en localStorage, para que el cambio no se pierda.
+//Luego se llama a muestra el carrito y los totales actualizados
 
 // ===============================================
 // SECCIÓN 4: CALCULAR TOTALES
@@ -90,6 +95,7 @@ function mostrarCarrito() {
 
 function calcularTotales() {
   const subtotal = cartItems.reduce((acc, p) => {
+    //acc es el acumulador
     const price = parseFloat(String(p.price).replace(/[^0-9.]/g, "")) || 0;
     const qty = parseInt(p.quantity) || 0;
     return acc + price * qty;
@@ -204,3 +210,9 @@ function mostrarMensaje(texto) {
     if (e.target === modal) modal.style.display = "none";
   };
 }
+
+
+// cart-item tiene ahora 3 hijos principales:
+// cart-item__image: imagen
+// cart-item__main: título
+// cart-item__meta: cantidad, subtotal y botón 
