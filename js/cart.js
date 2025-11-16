@@ -32,36 +32,51 @@ function mostrarCarrito() {
   cartContainer.innerHTML = "";
 
   // Mostramos cada producto
-  cartItems.forEach((producto) => {
-    const card = document.createElement("div");
-    card.classList.add("cart-item");
+  cartItems.forEach((producto, index) => { 
+  const card = document.createElement("div");
+  card.classList.add("cart-item");
 
-    card.innerHTML = `
-      <!-- COLUMNA 1: IMAGEN -->
-      <div class="cart-item__image">
-        <img src="${producto.image}" alt="${producto.name}">
+  card.innerHTML = `
+    <!-- COLUMNA 1: IMAGEN -->
+    <div class="cart-item__image">
+      <img src="${producto.image}" alt="${producto.name}">
+    </div>
+
+    <!-- COLUMNA 2: TÍTULO -->
+    <div class="cart-item__main">
+      <h3 class="cart-item__title">${producto.name}</h3>
+    </div>
+    
+    <!-- COLUMNA 3: CANTIDAD + SUBTOTAL + ELIMINAR -->
+    <div class="cart-item__meta">
+      <div class="cart-item__qty d-flex align-items-center gap-2">
+        <strong>Cantidad:</strong>
+        <input
+          type="number"
+          min="1"
+          class="form-control form-control-sm cart-item__cantidad-input"
+          value="${producto.quantity}"
+          data-index="${index}"
+          style="width: 70px;"
+        >
       </div>
 
-      <!-- COLUMNA 2: TÍTULO -->
-      <div class="cart-item__main">
-        <h3 class="cart-item__title">${producto.name}</h3>
-      </div>
-      
-      <!-- COLUMNA 3: CANTIDAD + SUBTOTAL + (BOTÓN ELIMINAR VISUAL) -->
-      <div class="cart-item__meta">
-        <span class="cart-item__qty"><strong>Cantidad:</strong> ${producto.quantity}</span>
-        <span class="cart-item__subtotal">
-          <strong>Subtotal:</strong> $${totalProducto(producto.price, producto.quantity)}
-        </span>
-        <!-- Botón sólo visual, la lógica la implementa el compañero -->
-        <button class="btn btn-danger btn-sm">
-          Eliminar
-        </button>
-      </div>
-    `;
+      <span class="cart-item__subtotal">
+        <strong>Subtotal:</strong> $${totalProducto(producto.price, producto.quantity)}
+      </span>
 
-    cartContainer.appendChild(card);
-  });
+      <button class="btn btn-danger btn-sm eliminar-btn" data-index="${index}">
+        Eliminar
+      </button>
+    </div>
+  `;
+
+  cartContainer.appendChild(card);
+});
+
+    agregarEventosEliminar();
+    agregarEventosCantidad();
+
 
   // SECCIÓN 4: Calculamos y actualizamos total
   const total = cartItems.reduce((acc, producto) => {
@@ -73,6 +88,60 @@ function mostrarCarrito() {
   actualizarTotal(total);
   actualizarResumenCarrito(total); // SUBTOTAL: FALTA LOGICA KIM 
 }
+
+// SECCIÓN CÓDIGO MARCOS: Eliminar de a 1 unidad
+function agregarEventosEliminar() {
+  const botonesEliminar = document.querySelectorAll('.eliminar-btn');
+
+  botonesEliminar.forEach((boton) => {
+    boton.addEventListener('click', () => {
+      const index = parseInt(boton.dataset.index, 10);
+      if (isNaN(index)) return;
+
+      const producto = cartItems[index];
+      if (!producto) return;
+
+      // 🔹 Si hay más de 1 unidad, resto una
+      let cantidad = parseInt(producto.quantity) || 0;
+      if (cantidad > 1) {
+        producto.quantity = cantidad - 1;
+      } else {
+        // 🔹 Si queda 1, saco el producto del carrito
+        cartItems.splice(index, 1);
+      }
+
+      // Guardamos el nuevo estado en localStorage
+      localStorage.setItem('cartProducts', JSON.stringify(cartItems));
+
+      // Redibujamos carrito y resumen con los datos actualizados
+      mostrarCarrito();
+    });
+  });
+}
+
+// SECCIÓN: Cambiar cantidad desde el input
+function agregarEventosCantidad() {
+  const inputs = document.querySelectorAll('.cart-item__cantidad-input');
+
+  inputs.forEach((input) => {
+    input.addEventListener('change', () => {
+      const index = parseInt(input.dataset.index, 10);
+      if (isNaN(index)) return;
+
+      let nuevaCantidad = parseInt(input.value, 10);
+      if (isNaN(nuevaCantidad) || nuevaCantidad < 1) {
+        nuevaCantidad = 1;
+      }
+
+      if (!cartItems[index]) return;
+      cartItems[index].quantity = nuevaCantidad;
+
+      localStorage.setItem('cartProducts', JSON.stringify(cartItems));
+      mostrarCarrito();
+    });
+  });
+}
+
 
 // SECCIÓN 5: Actualizar el total en el resumen (span grande del costado)
 function actualizarTotal(total) {
