@@ -1,6 +1,8 @@
 // SECCIÓN 1: Contenedor principal donde se insertan los productos 
 const cartContainer = document.getElementById('productos-comprados');
 const cartItems = JSON.parse(localStorage.getItem('cartProducts')) || [];
+const finalizarBtn = document.getElementById("boton-compra-finalizar");
+const mensajeCompra = document.getElementById("mensaje-compra");
 
 // SECCIÓN 2: Calcula el precio total del producto 
 function totalProducto(price, quantity) {
@@ -22,7 +24,7 @@ function mostrarCarrito() {
       </div>
     `;
     actualizarTotal(0);
-    actualizarResumenCarrito(0); // stub para KIM
+    actualizarResumenCarrito(0); // KIM
     return;
   }
 
@@ -69,7 +71,7 @@ function mostrarCarrito() {
   }, 0);
 
   actualizarTotal(total);
-  actualizarResumenCarrito(total); // KIM puede usar este subtotal
+  actualizarResumenCarrito(total); // SUBTOTAL: FALTA LOGICA KIM 
 }
 
 // SECCIÓN 5: Actualizar el total en el resumen (span grande del costado)
