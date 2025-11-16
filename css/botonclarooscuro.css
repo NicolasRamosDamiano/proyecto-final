@@ -152,3 +152,39 @@ background: linear-gradient(to bottom,var(--color-producto-fondo), var(--color-p
   background-color: var(--colorgris) !important;
   color: var(--colorjjj) !important;
 }
+
+/*================================================================
+                    CARRITO MODO OSCURO
+  ================================================================ */
+
+html[data-tema="oscuro"] .cart-item {
+  background-color: var(--color-boton);         /* #3f063d en oscuro */
+  color: var(--color-boton-texto);              /* texto blanco */
+}
+
+html[data-tema="oscuro"] .cart-item__title,
+html[data-tema="oscuro"] .cart-item__qty,
+html[data-tema="oscuro"] .cart-item__subtotal {
+  color: var(--color-boton-texto);
+}
+
+/*================================================================
+                    BOTON FINALIZAR COMPRA
+  ================================================================ */
+
+/* Aseguramos que siga la paleta del tema */
+#boton-compra-finalizar {
+  background-color: var(--color-boton) !important;
+  color: var(--color-boton-texto) !important;
+  border-color: var(--color-boton) !important;
+}
+
+/* Hover en modo CLARO: un poco más oscuro */
+html[data-tema="claro"] #boton-compra-finalizar:hover {
+  filter: brightness(0.9);
+}
+
+/* Hover en modo OSCURO: un poco más claro */
+html[data-tema="oscuro"] #boton-compra-finalizar:hover {
+  filter: brightness(1.2);
+}

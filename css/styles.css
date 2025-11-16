@@ -1,4 +1,16 @@
 /*================================================================
+                            INDICE FALTA HACER
+  ================================================================ */
+/* === NAVBAR === */
+/* === NAVBAR === */
+/* === NAVBAR === */
+/* === NAVBAR === */
+/* === NAVBAR === */
+/* === NAVBAR === */
+/* === NAVBAR === */
+
+
+/*================================================================
   SECCIÓN 1: TIPOGRAFÍAS, ESTILOS BASE, AJUSTES, MEDIA QUERY BASE
   ================================================================ */
 .jumbotron,
@@ -50,8 +62,6 @@
   border-radius: 10px;
   text-shadow: 1px 1px 2px grey;
 }
-
-
 
 .jumbotron.lead {
   font-size: 38px;
@@ -110,8 +120,6 @@ footer a {
 .cursor-active{ 
   cursor: pointer; 
 }
-
-
 
 /*================================================================
                   SECCIÓN 6: SPINNER / LOADER
@@ -228,38 +236,77 @@ main {
 /*================================================================
             SECCIÓN 10: GRID DE PRODUCTOS COMPRADOS
   ================================================================ */
-.productos-comprados1{
-  max-width: 99% ;
-  max-height: 99%;
-  margin-top: 2px;
-text-align: center;
-align-items: center;
-align-content: center;
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 20px;
+.carrito-items,
+#productos-comprados {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.productos-comprados1 img{
-  width: 200px;
-  height: 200px;
-  margin-top: 10px;
-  border-radius: 20px;
+/*Fila de cada producto*/
+.cart-item{
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  padding: 12px 24px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+  background-color: #f9BD09;
+  color: #000;
 }
 
-.producto1{
-  border: 2px solid black;
-  margin: 10px;
-  padding: 10px;
-  box-shadow: 2px 2px 10px 5px;
-  max-width: 350px;
-  max-height: 350px;
-min-height: 350PX;
-min-width: 350PX;
-border-radius: 20px;
+/*¨COLUMNA 1:IMAGEN*/
+.cart-item__image {
+  flex: 0 0 70px;
 }
 
-/*================================================================
+.cart-item__image img{
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/*¨COLUMNA 2:TÍTULO*/
+.cart-item__main {
+  flex:  1 1 auto;
+}
+
+.cart-item__title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/*¨COLUMNA 3:CANTIDAD + SUBTOTAL + ELIMINAR*/
+.cart-item__meta {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: flex-end;
+  white-space: nowrap;
+}
+
+/* Textos de cantidad y subtotal*/
+.cart-item_-qty,
+.cart-item__subtotal1 {
+  font-size: 0.95rem;
+}
+
+/* Botón eliminar dentro de la meta*/
+.cart-item__meta .eliminar-btn {
+  margin-left: 4px;
+  font-size: 0.8rem;
+  padding: 3px 10px;
+}
+
+.carrito-resumen-wrapper {
+  margin-top: 1.5rem;
+  padding: 1rem 0;
+}
+
+  /*================================================================
             SECCIÓN 11: BADGE DEL CARRITO / TOTAL COMPRA
   ================================================================ */
 
@@ -301,28 +348,233 @@ border-radius: 20px;
 /*================================================================
             SECCIÓN 12: MEDIA QUERIES (RESPONSIVE)
   ================================================================ */
-@media (max-width: 1400px) {
-  .productos-comprados1 {
-    grid-template-columns: repeat(3, 1fr);
+
+  @media (max-width: 1400px) {
+  .resumen-compra {
+    max-width: 520%;
+    margin-top: 2rem;
+  }
+  
+  .resumen-caja {
+    padding: 1.4rem 1.6rem;
   }
 }
 
-@media (max-width: 1100px) {
-  .productos-comprados1 {
-    grid-template-columns: repeat(2, 1fr);
+@media (max-widht:1100px) {
+  .resumen-compra {
+    max-width: 100%;
+    margin-top: 1.5rem;
+  }
+
+.cart-item {
+  padding: 10px 14px;
+}
+
+.cart-item__image img {
+  width: 60px;
+  height: 60px;
   }
 }
 
 @media (max-width: 600px) {
   #cart-total, .cart-badget {
     position: static;
-    margin: 10px;
+    margin: 10px 0;
   }
 
-  .productos-comprados1 {
-    grid-template-columns: repeat(1, 1fr);
+.cart-item {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.cart-item__main, .cart-item__meta {
+  width: 100%;
+}
+
+.cart-item__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.resumen-caja {
+  padding: 1rem 1.25rem;
+  }
+}
+
+/*================================================================
+            SECCIÓN 13: NUEVA DISTRIBUCIÓN DEL CARRITO
+  ================================================================ */
+.carrito-horizontal{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+}
+
+#productos-comprados{
+  flex: 3;
+}
+
+.carrito-resumen{
+  flex: 1;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/*================================================================
+  SECCIÓN 13: FORMULARIO DE ENVÍO Y RESUMEN DEL CARRITO
+  ================================================================ */
+
+/* BLOQUES DE: "Dirección de envío" y "Método de envío" */
+.bloque-carrito {
+  max-width: 900px;
+  margin: 0 auto 1.5rem;
+}
+
+.titulo-bloque {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+/* DIRECCIÓN DE ENVÍO */
+.form-direccion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.fila-direccion {
+  display: flex;
+  gap: 1rem;
+}
+
+.fila-dos-columnas .grupo-input {
+  flex: 1 1 0;
+}
+
+.grupo-input {
+  width: 100%;
+}
+
+.grupo-input label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+
+.grupo-input input.form-control {
+  font-size: 0.9rem;
+  padding: 0.45rem 0.6rem;
+}
+
+/* INPUTS EN MODO OSCURO */
+html[data-tema="oscuro"] .grupo-input input.form-control {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border-color: #555555;
+}
+
+/* METODO DE ENVÍO */
+/* BLOQUES*/
+.envio-opciones {
+  display: flex;
+  justify-content: center; 
+  gap: 40px;                 
+  flex-wrap: wrap;           /* NECESEARIO PARA EL RESPONSIVE POR SI LA PANTALLA ES MAS CHICA */
+}
+
+.envio-opcion {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.envio-opcion input[type="radio"] {
+  margin-top: 4px;           /* CIRCULO */
+}
+
+.envio-texto {
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+/* RE4SUMEN DE COMPRAS */
+.resumen-compra {
+  max-width: 480px;
+  margin: 1.5rem auto 0;
+}
+
+.resumen-caja {
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  border-radius: 16px;
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+html[data-tema="oscuro"] .resumen-caja {
+  background-color: #2a2a2a;
+  border-color: #444444;
+}
+
+.resumen-titulo {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.fila-resumen {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+  padding: 0.25rem 0;
+}
+
+.fila-resumen-total {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.resumen-divisor {
+  margin: 0.75rem 0;
+}
+
+/* BOTÓN FINALIZAR COMPRA */
+#boton-compra-finalizar {
+  border-radius: 999px;
+  font-weight: 600;
+  margin-top: 1rem;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+#boton-compra-finalizar:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .fila-direccion {
+    flex-direction: column;
+  }
+
+  .resumen-compra {
+    max-width: 100%;
   }
 }
 
 
-/* SECCIÓN 5: float: left: anticuado se reemplaza por object-fit para que todas las imágenes queden iguales y modernas.
+
+
+
+
