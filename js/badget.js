@@ -1,10 +1,8 @@
-(function () {
-  const originalSetItem = localStorage.setItem;
-  localStorage.setItem = function (key, value) {
-    originalSetItem.apply(this, arguments);
-    if (key === 'cartProducts') actualizarBadge();
-  };
-})();
+const originalSetItem = localStorage.setItem;
+localStorage.setItem = (key, value) => {
+  originalSetItem.call(localStorage, key, value);
+  if (key === 'cartProducts') actualizarBadge();
+};
 
 function actualizarBadge() {
   const cartItems = JSON.parse(localStorage.getItem('cartProducts')) || [];

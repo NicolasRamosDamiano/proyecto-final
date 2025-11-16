@@ -22,6 +22,7 @@ html[data-tema="oscuro"] {
   --color-producto-fondo2: #ebe8e8;
   --color-ventas: #181313;
   --colorjjj: #110c0c;
+  --colorgris: #b1b6b6;
 
 }
 body {
@@ -136,5 +137,18 @@ background: linear-gradient(to bottom,var(--color-producto-fondo), var(--color-p
   color: var(--color-texto) !important;
 }
 .producto-descripcion{
+  color: var(--colorjjj) !important;
+}
+
+.mt-3{
+  background-color: var(--color-fondo) !important;
+  color: var(--color-texto) !important;
+}
+#nuevoComentario{
+  background-color: var(--colorgris) !important;
+  color: var(--colorjjj) !important;
+}
+.card-body{
+  background-color: var(--colorgris) !important;
   color: var(--colorjjj) !important;
 }

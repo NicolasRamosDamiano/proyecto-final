@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-tema="claro"> <!--1-->
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -12,50 +12,71 @@
    <link rel="stylesheet" href="css/botonclarooscuro.css">
 </head>
 
-<body>
+  <body>
+
+    <button id="boton-tema" aria-label="Cambiar tema"></button>
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
+      </button>    
+
+  <main class="container my-5">
+    <h1 class="mb-4">Carrito de Compras</h1>
+      <div class="carrito-grid"> <!--2-->
+
+
+    <!-- LISTA DE PRODUCTOS-->
+  <div class="productos-comprados" class="carrito-productos"> </div>
+
+
+    <!-- RESUMEN DE COMPRAS --> <!--3-->
+    <aside class="carrito-resumen">
+      <h3>Resumen</h3>
+      <div id="cart-total" class="carrito-total">Total: $0.00</div>
+      
+      <button id="boton-compra-finalizar" class="btn btn-primary btn-lg w-100 mt-3">
+        Finalizar Compra
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
-          </li>
-          <button id="boton-tema" aria-label="Cambiar tema"></button>
-        </ul>
-      </div>
+    </aside> 
+ 
+    <!-- Nuevos botones para darle funcionalidad-->
+    <div class="container my-5">
+  <h3>Datos de envío</h3>
+  <form id="form-compra">
+    <div class="mb-3">
+      <label for="direccion" class="form-label">Dirección:</label>
+      <input type="text" id="direccion" class="form-control" placeholder="Ej: Calle 1234" required>
     </div>
-  </nav>
 
-  <main>
-    <div>
-      <div class="container my-5">
-        <h1 class="mb-4">Carrito de Compras</h1>
-        <div id="cart-items" class="mb-4">
-        </div>
+    <div class="mb-3">
+      <label class="form-label">Forma de envío:</label><br>
+      <input type="radio" name="envio" value="estandar"> Envío estándar<br>
+      <input type="radio" name="envio" value="express"> Envío exprés
+    </div>
 
-<div class="productos-comprados1" id="productos-comprados">
- </div>
+    <h3>Forma de pago</h3>
+    <div class="mb-3">
+      <select id="formaPago" class="form-select" required>
+        <option value="">Seleccione una opción</option>
+        <option value="tarjeta">Tarjeta de crédito</option>
+        <option value="transferencia">Transferencia bancaria</option>
+      </select>
+    </div>
+  </form>
 </div>
 
-        <div class="d-flex justify-content-between align-items-center">
-         <div class="total"> <h4>Total:$</h4>
-          <div id="cart-total">0.00</div></div>
-          <button id="boton-compra-finalizar" class="btn btn-primary btn-lg">Finalizar Compra</button>
-        </div>
-      </div>
-    </div>
+<div id="mensaje-compra" class="alert mt-3" style="display:none;"></div>
+<!-- Nuevos botones de costos para agregarles funcionalidad-->
+<div class="container my-4" id="costos">
+  <h3>Costos</h3>
+  <p><strong>Subtotal:</strong> $<span id="subtotal">0.00</span></p>
+  <p><strong>Costo de envío:</strong> $<span id="costo-envio">0.00</span></p>
+  <hr>
+  <p><strong>Total:</strong> $<span id="total-final">0.00</span></p>
+</div>
     
   </main>
   
@@ -69,10 +90,6 @@
   </footer>
   <div id="spinner-wrapper">
     <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
     </div>
   </div>
   <script src="js/bootstrap.bundle.min.js"></script>
