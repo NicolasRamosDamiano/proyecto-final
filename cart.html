@@ -11,6 +11,7 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <link rel="stylesheet" href="css/botonclarooscuro.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 
@@ -18,60 +19,163 @@
 
     <button id="boton-tema" aria-label="Cambiar tema"></button>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <nav class="navbar navbar-expand-lg navbar-light" id="navbar1">
+    <div class="container px-4 px-lg-5">
+      <a class="navbar-brand" href="index.html">CompraFácilUY</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-      </button>    
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sell.html">Vender</a>
+          </li>
+          <li class="nav-item">
+            <!-- ACÁ MARCAMOS CATEGORÍAS COMO ACTIVO -->
+            <a class="nav-link active" aria-current="page" href="categories.html">Categorías</a>
+          </li>
+          <li class="nav-item">
+            <li class="nav-item"><a class="nav-link" href="my-profile.html">
+            <i class="bi bi-person-circle"></i> Mi perfil </a></li>
+            </a>
+          </li>
+        </ul>
+
+        <form class="d-flex">
+          <a href="cart.html">
+            <button class="btn btn-outline-dark" type="button">
+              <i class="fa-solid fa-cart-shopping"></i>
+              Carrito
+              <span id="cart-count" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+            </button>
+          </a>
+        </form>
+      </div>
+    </div>
+  </nav>
 
   <main class="container my-5">
-    <h1 class="mb-4">Carrito de Compras</h1>
-      <div class="carrito-grid"> <!--2-->
+  <h1 class="mb-4">Carrito de Compras</h1>
 
+  <!-- 1) LISTA DE PRODUCTOS DEL CARRITO -->
+  <section id="carrito-lista" class="mt-4">
+    <div id="productos-comprados" class="carrito-items"></div>
+  </section>
 
-    <!-- LISTA DE PRODUCTOS-->
-  <div class="productos-comprados" class="carrito-productos"> </div>
+  <!-- 2) DIRECCIÓN DE ENVÍO -->
+  <section class="bloque-carrito mt-4">
+    <h2 class="titulo-bloque">Dirección de envío</h2>
 
-    </aside> 
- 
-    <!-- Nuevos botones para darle funcionalidad-->
-    <div class="container my-5">
-  <h3>Datos de envío</h3>
-  <form id="form-compra">
-    <div class="mb-3">
-      <label for="direccion" class="form-label">Dirección:</label>
-      <input type="text" id="direccion" class="form-control" placeholder="Ej: Calle 1234" required>
+    <div class="form-direccion">
+      <div class="fila-direccion fila-dos-columnas">
+        <div class="grupo-input">
+          <label for="dir-nombre">Nombre</label>
+          <input id="dir-nombre" type="text" class="form-control" placeholder="Nombre">
+        </div>
+        <div class="grupo-input">
+          <label for="dir-apellido">Apellido</label>
+          <input id="dir-apellido" type="text" class="form-control" placeholder="Apellido">
+        </div>
+      </div>
+
+      <div class="fila-direccion">
+        <div class="grupo-input">
+          <label for="dir-calle">Calle</label>
+          <input id="dir-calle" type="text" class="form-control" placeholder="Ej: Av. Italia 1234">
+        </div>
+      </div>
+
+      <div class="fila-direccion">
+        <div class="grupo-input">
+          <label for="dir-apto">Apartamento / Casa</label>
+          <input id="dir-apto" type="text" class="form-control" placeholder="Apartamento, casa, bloque, etc.">
+        </div>
+      </div>
+
+      <div class="fila-direccion fila-dos-columnas">
+        <div class="grupo-input">
+          <label for="dir-ciudad">Ciudad</label>
+          <input id="dir-ciudad" type="text" class="form-control" placeholder="Ciudad">
+        </div>
+        <div class="grupo-input">
+          <label for="dir-pais">País</label>
+          <input id="dir-pais" type="text" class="form-control" placeholder="País">
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="mb-3">
-      <label class="form-label">Forma de envío:</label><br>
-      <input type="radio" name="envio" value="estandar"> Envío estándar<br>
-      <input type="radio" name="envio" value="express"> Envío exprés
+  <!-- 3) MÉTODO DE ENVÍO -->
+  <section class="bloque-carrito mt-4">
+    <h2 class="titulo-bloque">Método de envío</h2>
+
+    <div class="envio-opciones">
+      <label class="envio-opcion">
+        <input type="radio" name="tipoEnvio" id="envio-premium" value="premium" data-porcentaje="15">
+        <span class="envio-circulo"></span>
+        <span class="envio-texto">
+          <strong>Premium</strong><br>
+          2 a 5 días (15%)
+        </span>
+      </label>
+
+      <label class="envio-opcion">
+        <input type="radio" name="tipoEnvio" id="envio-express" value="express" data-porcentaje="7">
+        <span class="envio-circulo"></span>
+        <span class="envio-texto">
+          <strong>Express</strong><br>
+          5 a 8 días (7%)
+        </span>
+      </label>
+
+      <label class="envio-opcion">
+        <input type="radio" name="tipoEnvio" id="envio-standard" value="standard" data-porcentaje="5">
+        <span class="envio-circulo"></span>
+        <span class="envio-texto">
+          <strong>Standard</strong><br>
+          12 a 15 días (5%)
+        </span>
+      </label>
     </div>
+  </section>
 
-    <h3>Forma de pago</h3>
-    <div class="mb-3">
-      <select id="formaPago" class="form-select" required>
-        <option value="">Seleccione una opción</option>
-        <option value="tarjeta">Tarjeta de crédito</option>
-        <option value="transferencia">Transferencia bancaria</option>
-      </select>
+  <!-- 4) RESUMEN DE COMPRAS -->
+  <section class="resumen-compra mt-4">
+    <div class="resumen-caja">
+      <h3 class="resumen-titulo mb-3">Resumen de compras</h3>
+
+      <div class="fila-resumen">
+        <span>Subtotal productos</span>
+        <span id="resumen-subtotal">$0.00</span>
+      </div>
+
+      <div class="fila-resumen">
+        <span>Costo de envío</span>
+        <!-- LÓGICA DE KIM -->
+        <span id="resumen-envio">$0.00</span>
+      </div>
+
+      <hr class="resumen-divisor">
+
+      <div class="fila-resumen fila-resumen-total">
+        <span>Total</span>
+        <span id="cart-total">$0.00</span>
+      </div>
+
+      <!-- FALTA LA LÓGICA DEL BOTÓN FINALIZAR COMPRA (KIM) -->
+      <button id="boton-compra-finalizar" class="btn btn-primary btn-lg w-100 mt-3">
+        Finalizar Compra
+      </button>
     </div>
-  </form>
-</div>
-
-<div id="mensaje-compra" class="alert mt-3" style="display:none;"></div>
-<!-- Nuevos botones de costos para agregarles funcionalidad-->
-<div class="container my-4" id="costos">
-  <h3>Costos</h3>
-  <p><strong>Subtotal:</strong> $<span id="subtotal">0.00</span></p>
-  <p><strong>Costo de envío:</strong> $<span id="costo-envio">0.00</span></p>
-  <hr>
-  <p><strong>Total:</strong> $<span id="total-final">0.00</span></p>
-</div>
-    
-  </main>
+  </section>
+</main>
   
   <footer class="text-muted">
     <div class="container">
@@ -86,15 +190,54 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/cart.js"></script>
-  <script src="js/verify.js"></script>
   <script src="js/botonclarooscuro.js"></script>
+  <script src="js/badget.js"></script>
 
 </body>
 </html>
 
 
-<!-- ANOTACIONES DE CAMBIOS Y EL POR QUE (ENTREGA 7)-->
+
+
+
+
+
+
+
+
+<!-- ANOTACIONES DE CAMBIOS Y EL POR QUE (ENTREGA 7)
+ FALTAN LOS CAMBIOS DE LOS CAMBIOS AJJA-->
 
 <!-- 1. DATA-TEMA CLARO: Cargamos un valor inicial para que el CSS funcione desde el primer milisegundo antes de que cargue el JS-->
 <!--2. CARRITO-GRID: Para asemejar al diseño del figma fue necesario porque sirve para organizar dos columnas. carrito-grid =contenedor que define el layout del carrito-->
 <!--3. INCORPORAMOS ETIQUETA ASIDE: Se utilizo para diferenciar el contenido complementario del principal, es decir, información relacionada -->
+<!--4. Se retira de los scripts <script src="js/verify.js"></script> ya que no existe ningún elemento con id="email", por lo tanto devuelve NULL 
+      ADJUNTO: Uncaught TypeError: Cannot set properties of null (setting 'innerHTML') at HTMLDocument.<anonymous> (verify.js:9:24)-->
+        <!-- envolver la lista de productos + el resumen en un contenedor horizontal.  <main class="container my-5">
+    <h1 class="mb-4">Carrito de Compras</h1>
+      <div class="carrito-grid"> 2-->
+
+
+    <!-- LISTA DE PRODUCTOS-->
+  <!-- <div id="productos-comprados" class="productos-comprados carrito-productos"> </div>
+
+
+     RESUMEN DE COMPRAS --> <!--3-->
+    <!-- <aside class="carrito-resumen">
+      <h3>Resumen</h3>
+      <div id="cart-total" class="carrito-total">Total: $0.00</div>
+      
+      <button id="boton-compra-finalizar" class="btn btn-primary btn-lg w-100 mt-3">
+        Finalizar Compra
+      </button>
+    </aside> 
+      
+    </div>
+  </main>-->
+
+  <!-- LISTA DE PRODUCTOS-->
+  <!-- <section id="carrito-lista">
+    <div id="productos-comprados" class="carrito-items"></div>
+  </section> añadimos section para poder distribuir de mejor forma los productos 
+
+   resumen-subtotal, resumen-envio, resumen-total, boton-compra-finalizar.-->

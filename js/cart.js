@@ -1,181 +1,116 @@
+// SECCIÓN 1: Contenedor principal donde se insertan los productos 
 const cartContainer = document.getElementById('productos-comprados');
 const cartItems = JSON.parse(localStorage.getItem('cartProducts')) || [];
 const finalizarBtn = document.getElementById("boton-compra-finalizar");
 const mensajeCompra = document.getElementById("mensaje-compra");
 
+// SECCIÓN 2: Calcula el precio total del producto 
 function totalProducto(price, quantity) {
-  const precio = parseFloat(price.replace(/[^0-9.]/g, "")) || 0;
+  const precio = parseFloat(String(price).replace(/[^0-9.]/g, "")) || 0;
   const cantidad = parseInt(quantity) || 0;
   return (precio * cantidad).toFixed(2);
 }
 
-function eliminarUnidad(productoId) {
-    const index = cartItems.findIndex(item => item.id === productoId);
-    
-    if (index !== -1) {
-        if (cartItems[index].quantity > 1) {
-            // Reduce la cantidad en 1
-            cartItems[index].quantity--;
-        } else {
-            // Si solo queda 1 unidad, elimina el producto completamente
-            cartItems.splice(index, 1);
-        }
-        
-        // Actualiza el localStorage
-        localStorage.setItem('cartProducts', JSON.stringify(cartItems));
-        
-        // Actualiza la visualización
-        cartContainer.innerHTML = '';
-        mostrarCarrito();
-        calcularTotalCarrito();
-    }
-}
-
+// SECCIÓN 3: Muestra productos en el carrito
 function mostrarCarrito() {
+  if (!cartContainer) return;
 
+  // ¿Y si no hay productos? > mostrar mensaje
   if (!cartItems || cartItems.length === 0) {
-  cartContainer.innerHTML = `
-    <div class="carrito-vacio" style="padding:20px;text-align:center;">
-      <p><strong>Tu carrito está vacío</strong></p>
-      <p>carente de productos en su interior que lo llenen, impidiendole cumplir su propósito.</p>
-    </div>
-  `;
-  return;
+    cartContainer.innerHTML = `
+      <div class="carrito-vacio">
+        <p><strong>Tu carrito está vacío</strong></p>
+        <p>Tu carrito está vacío. Agregá productos y acercate a lo que querés :)</p>
+      </div>
+    `;
+    actualizarTotal(0);
+    actualizarResumenCarrito(0); // KIM
+    return;
+  }
+
+  // Si hay productos, limpiamos el contenedor
+  cartContainer.innerHTML = "";
+
+  // Mostramos cada producto
+  cartItems.forEach((producto) => {
+    const card = document.createElement("div");
+    card.classList.add("cart-item");
+
+    card.innerHTML = `
+      <!-- COLUMNA 1: IMAGEN -->
+      <div class="cart-item__image">
+        <img src="${producto.image}" alt="${producto.name}">
+      </div>
+
+      <!-- COLUMNA 2: TÍTULO -->
+      <div class="cart-item__main">
+        <h3 class="cart-item__title">${producto.name}</h3>
+      </div>
+      
+      <!-- COLUMNA 3: CANTIDAD + SUBTOTAL + (BOTÓN ELIMINAR VISUAL) -->
+      <div class="cart-item__meta">
+        <span class="cart-item__qty"><strong>Cantidad:</strong> ${producto.quantity}</span>
+        <span class="cart-item__subtotal">
+          <strong>Subtotal:</strong> $${totalProducto(producto.price, producto.quantity)}
+        </span>
+        <!-- Botón sólo visual, la lógica la implementa el compañero -->
+        <button class="btn btn-danger btn-sm">
+          Eliminar
+        </button>
+      </div>
+    `;
+
+    cartContainer.appendChild(card);
+  });
+
+  // SECCIÓN 4: Calculamos y actualizamos total
+  const total = cartItems.reduce((acc, producto) => {
+    const precio = parseFloat(String(producto.price).replace(/[^0-9.]/g, "")) || 0;
+    const cantidad = parseInt(producto.quantity) || 0;
+    return acc + (precio * cantidad);
+  }, 0);
+
+  actualizarTotal(total);
+  actualizarResumenCarrito(total); // SUBTOTAL: FALTA LOGICA KIM 
 }
-    cartItems.forEach(producto => {
-        const card = document.createElement("div");
-        card.classList.add("producto1");
 
-        card.innerHTML = `
-            <img src="${producto.image}" alt="${producto.name}" class="producto-img">
-            <h3 class="producto-nombre">${producto.name}</h3>
-            <p class="producto-precio">
-                <strong>Cantidad:</strong>${producto.quantity}  <strong>Precio $${totalProducto(producto.price, producto.quantity)}</strong>
-            </p>
-            <button class="btn btn-danger btn-sm eliminar-unidad" data-id="${producto.id}">Eliminar</button>
-            
-        `;
+// SECCIÓN 5: Actualizar el total en el resumen (span grande del costado)
+function actualizarTotal(total) {
+  const totalElemento = document.getElementById("cart-total");
+  if (totalElemento) {
+    totalElemento.textContent = `$${Number(total).toFixed(2)}`;
+  }
+}
 
-        cartContainer.appendChild(card);
-        
-        // Agregar event listener para el botón de eliminar unidad
-        const btnEliminarUnidad = card.querySelector('.eliminar-unidad');
-        btnEliminarUnidad.addEventListener('click', () => {
-            eliminarUnidad(producto.id);
-        });
-    });
+// SECCIÓN 6 : Resumen de costos FALTA LOGICA KIM
+// Falta modifica subtotal y ademas sumar envio y mostrar el total al final de la tarjeta 
+
+function actualizarResumenCarrito(subtotal) {
+  const subtotalSpan = document.getElementById('resumen-subtotal');
+  const envioSpan = document.getElementById('resumen-envio');
+  const totalSpan = document.getElementById('resumen-total');
+
+  if (subtotalSpan) {
+    subtotalSpan.textContent = `$${Number(subtotal).toFixed(2)}`;
+  }
+
+  // Envío en 0.00.
+  if (envioSpan && !envioSpan.dataset.controladoPorKim) {
+    envioSpan.textContent = '$0.00';
+  }
+
+  // Total = FALTA LOGICA DE (subtotal + envío).
+  if (totalSpan) {
+    totalSpan.textContent = `$${Number(subtotal).toFixed(2)}`;
+  }
 }
 
 mostrarCarrito();
 
-function calcularTotalCarrito() {
-  const total = cartItems.reduce((acc, producto) => {
-    const precio = parseFloat(producto.price.replace(/[^0-9.]/g, "")) || 0;
-    const cantidad = parseInt(producto.quantity) || 0;
-    return acc + (precio * cantidad);
-  }, 0);
 
-  const totalElemento = document.getElementById("cart-total");
-  totalElemento.innerHTML = `<strong>Total a pagar:</strong> $${total.toFixed(2)}`;
-}
-calcularTotalCarrito();
+// cart-item tiene ahora 3 hijos principales:
+// cart-item__image: imagen
+// cart-item__main: título
+// cart-item__meta: cantidad, subtotal y botón (sin lógica)
 
-
-// === Validaciones y botón "Finalizar compra" ===
-
-finalizarBtn.addEventListener("click", () => {
-  const direccion = document.getElementById("direccion").value.trim();
-  const envioSeleccionado = document.querySelector('input[name="envio"]:checked');
-  const formaPago = document.getElementById("formaPago").value;
-
-  // Validar dirección
-  if (direccion === "") {
-    mostrarMensaje("Debes ingresar una dirección.", "danger");
-    return;
-  }
-
-  // Validar envío
-  if (!envioSeleccionado) {
-    mostrarMensaje("Debes seleccionar una forma de envío.", "danger");
-    return;
-  }
-
-  // Validar carrito
-  if (cartItems.length === 0) {
-    mostrarMensaje("Tu carrito está vacío.", "danger");
-    return;
-  }
-
-  if (cartItems.some(p => !p.quantity || p.quantity <= 0)) {
-    mostrarMensaje("La cantidad de cada producto debe ser mayor a 0.", "danger");
-    return;
-  }
-
-  // Validar forma de pago
-  if (formaPago === "") {
-    mostrarMensaje("Debes seleccionar una forma de pago.", "danger");
-    return;
-  }
-
-  //  Si todo está correcto
-  mostrarMensaje("✅ ¡Compra finalizada con éxito! Gracias por tu compra.", "success");
-
-  // Vaciar carrito simulado
-  localStorage.removeItem("cartProducts");
-  cartContainer.innerHTML = "";
-  document.getElementById("cart-total").innerHTML = "$0.00";
-});
-
-// Mostrar mensaje temporal
-function mostrarMensaje(texto, tipo) {
-  mensajeCompra.textContent = texto;
-  mensajeCompra.className = `alert alert-${tipo}`;
-  mensajeCompra.style.display = "block";
-  setTimeout(() => mensajeCompra.style.display = "none", 4000);
-}
-// SECCIÓN DE COSTOS 
-
-// Calcula el subtotal total del carrito
-function calcularSubtotal() {
-  return cartItems.reduce((acc, producto) => {
-    const precio = parseFloat(producto.price.replace(/[^0-9.]/g, "")) || 0; 
-    const cantidad = parseInt(producto.quantity) || 0;
-    return acc + (precio * cantidad);
-  }, 0);
-}
-//replace(/[^0-9.]/g, ""//
-// Usa una expresión regular (regex) para eliminar todo lo que no sea un número o punto decimal
-//[^0-9.] = “cualquier carácter que no sea número (0–9) o punto (.)”//
-//g = “buscar en toda la cadena, no solo la primera coincidencia”// 
-
-// Calcula el costo de envío según el tipo seleccionado
-function calcularEnvio() {
-  const envioSeleccionado = document.querySelector('input[name="envio"]:checked');
-  const subtotal = calcularSubtotal();
-  if (!envioSeleccionado) return 0;
-
-  if (envioSeleccionado.value === "estandar") {
-    return subtotal * 0.05; 
-  } else if (envioSeleccionado.value === "express") {
-    return subtotal * 0.10; 
-  }
-  return 0;
-}
-
-// Actualiza los valores de costos en pantalla
-function actualizarCostos() {
-  const subtotal = calcularSubtotal();
-  const costoEnvio = calcularEnvio();
-  const totalFinal = subtotal + costoEnvio;
-
-  document.getElementById("subtotal").textContent = subtotal.toFixed(2);
-  document.getElementById("costo-envio").textContent = costoEnvio.toFixed(2);
-  document.getElementById("total-final").textContent = totalFinal.toFixed(2);
-  document.getElementById("cart-total").innerHTML = `<strong>Total a pagar:</strong> $${totalFinal.toFixed(2)}`;
-}
-
-// Escucha los cambios en el tipo de envío y actualiza los costos
-document.querySelectorAll('input[name="envio"]').forEach(radio => {
-  radio.addEventListener("change", actualizarCostos);
-});
 
