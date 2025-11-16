@@ -3,16 +3,18 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>eMercado - Todo lo que busques está aquí</title>
+  
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
-   <link rel="stylesheet" href="css/botonclarooscuro.css">
+  <link rel="stylesheet" href="css/botonclarooscuro.css">
 </head>
 
-  <body>
+
+<body>
 
     <button id="boton-tema" aria-label="Cambiar tema"></button>
 
@@ -31,15 +33,6 @@
     <!-- LISTA DE PRODUCTOS-->
   <div class="productos-comprados" class="carrito-productos"> </div>
 
-
-    <!-- RESUMEN DE COMPRAS --> <!--3-->
-    <aside class="carrito-resumen">
-      <h3>Resumen</h3>
-      <div id="cart-total" class="carrito-total">Total: $0.00</div>
-      
-      <button id="boton-compra-finalizar" class="btn btn-primary btn-lg w-100 mt-3">
-        Finalizar Compra
-      </button>
     </aside> 
  
     <!-- Nuevos botones para darle funcionalidad-->
@@ -82,9 +75,7 @@
   
   <footer class="text-muted">
     <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
+      <p class="float-end"> <a href="#">Volver arriba</a> </p>
       <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
     </div>
   </footer>
@@ -96,7 +87,14 @@
   <script src="js/init.js"></script>
   <script src="js/cart.js"></script>
   <script src="js/verify.js"></script>
-   <script src="js/botonclarooscuro.js"></script>
-</body>
+  <script src="js/botonclarooscuro.js"></script>
 
+</body>
 </html>
+
+
+<!-- ANOTACIONES DE CAMBIOS Y EL POR QUE (ENTREGA 7)-->
+
+<!-- 1. DATA-TEMA CLARO: Cargamos un valor inicial para que el CSS funcione desde el primer milisegundo antes de que cargue el JS-->
+<!--2. CARRITO-GRID: Para asemejar al diseño del figma fue necesario porque sirve para organizar dos columnas. carrito-grid =contenedor que define el layout del carrito-->
+<!--3. INCORPORAMOS ETIQUETA ASIDE: Se utilizo para diferenciar el contenido complementario del principal, es decir, información relacionada -->
