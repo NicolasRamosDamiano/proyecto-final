@@ -306,6 +306,12 @@ main {
   padding: 1rem 0;
 }
 
+.cart-item__cantidad-input {
+  text-align: center !important;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
   /*================================================================
             SECCIÓN 11: BADGE DEL CARRITO / TOTAL COMPRA
   ================================================================ */
