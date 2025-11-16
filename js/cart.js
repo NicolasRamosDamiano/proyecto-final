@@ -16,7 +16,7 @@ const envioRadios = document.querySelectorAll('input[name="tipoEnvio"]');
 // ===============================================
 
 function totalProducto(price, quantity) {
-  const precio = parseFloat(String(price).replace(/[^0-9.]/g, "")) || 0;//con esta función se elimina todo lo que no es número
+  const precio = parseFloat(String(price).replace(/[^0-9.]/g, "")) || 0;
   const cantidad = parseInt(quantity) || 0;
   return (precio * cantidad).toFixed(2);
 }
@@ -36,82 +36,92 @@ function mostrarCarrito() {
         <p>Agregá productos :)</p>
       </div>
     `;
-    actualizarResumenCarrito(0);
+    actualizarTotales();
     return;
   }
 
   cartContainer.innerHTML = "";
 
-  // Mostramos cada producto
-  cartItems.forEach((producto, index) => { 
-  const card = document.createElement("div");
-  card.classList.add("cart-item");
+  cartItems.forEach((producto, index) => {
+    const card = document.createElement("div");
+    card.classList.add("cart-item");
 
-  card.innerHTML = `
-    <!-- COLUMNA 1: IMAGEN -->
-    <div class="cart-item__image">
-      <img src="${producto.image}" alt="${producto.name}">
-    </div>
-
-    <!-- COLUMNA 2: TÍTULO -->
-    <div class="cart-item__main">
-      <h3 class="cart-item__title">${producto.name}</h3>
-    </div>
-    
-    <!-- COLUMNA 3: CANTIDAD + SUBTOTAL + ELIMINAR -->
-    <div class="cart-item__meta">
-      <div class="cart-item__qty d-flex align-items-center gap-2">
-        <strong>Cantidad:</strong>
-        <input
-          type="number"
-          min="1"
-          class="form-control form-control-sm cart-item__cantidad-input"
-          value="${producto.quantity}"
-          data-index="${index}"
-          style="width: 70px;"
-        >
+    card.innerHTML = `
+      <div class="cart-item__image">
+        <img src="${producto.image}" alt="${producto.name}">
       </div>
 
-      <span class="cart-item__subtotal">
-        <strong>Subtotal:</strong> $${totalProducto(producto.price, producto.quantity)}
-      </span>
+      <div class="cart-item__main">
+        <h3 class="cart-item__title">${producto.name}</h3>
+      </div>
+      
+      <div class="cart-item__meta">
+        <div class="cart-item__qty d-flex align-items-center gap-2">
+          <strong>Cantidad:</strong>
+          <input
+            type="number"
+            min="1"
+            class="form-control form-control-sm cart-item__cantidad-input"
+            value="${producto.quantity}"
+            data-index="${index}"
+            style="width: 70px;"
+          >
+        </div>
 
-      <button class="btn btn-danger btn-sm eliminar-btn" data-index="${index}">
-        Eliminar
-      </button>
-    </div>
-  `;
+        <span class="cart-item__subtotal">
+          <strong>Subtotal:</strong> $${totalProducto(producto.price, producto.quantity)}
+        </span>
 
-  cartContainer.appendChild(card);
-});
+        <button class="btn btn-danger btn-sm eliminar-btn" data-index="${index}">
+          Eliminar
+        </button>
+      </div>
+    `;
 
-    agregarEventosEliminar();
-    agregarEventosCantidad();
+    cartContainer.appendChild(card);
+  });
 
-
-  calcularTotales();
+  agregarEventosEliminar();
+  agregarEventosCantidad();
+  actualizarTotales();
 }
-//funcionalidad de este evento: Cuando se hace clic en un botón:Se obtiene el número (índice) del producto, que viene guardado dentro del atributo data-index del botón.
-//Con ese índice, se quita ese producto del array del carrito usando splice().
-//Después de eliminarlo, se guarda el carrito actualizado en localStorage, para que el cambio no se pierda.
-//Luego se llama a muestra el carrito y los totales actualizados
+
 
 // ===============================================
 // SECCIÓN 4: CALCULAR TOTALES
 // ===============================================
 
-function calcularTotales() {
+function actualizarTotales() {
+  // Subtotal productos
   const subtotal = cartItems.reduce((acc, p) => {
-    //acc es el acumulador
     const price = parseFloat(String(p.price).replace(/[^0-9.]/g, "")) || 0;
     const qty = parseInt(p.quantity) || 0;
     return acc + price * qty;
   }, 0);
 
-  actualizarResumenCarrito(subtotal);
+  // Envío
+  const envioSeleccionado = document.querySelector('input[name="tipoEnvio"]:checked');
+  const porcentajeEnvio = envioSeleccionado ? parseFloat(envioSeleccionado.dataset.porcentaje) : 0;
+  const costoEnvio = (subtotal * porcentajeEnvio) / 100;
+
+  // Total final
+  const totalFinal = subtotal + costoEnvio;
+
+  // Actualizar HTML
+  const subtotalSpan = document.getElementById("resumen-subtotal");
+  const envioSpan = document.getElementById("resumen-envio");
+  const totalSpan = document.getElementById("cart-total");
+
+  if (subtotalSpan) subtotalSpan.textContent = `$${subtotal.toFixed(2)}`;
+  if (envioSpan) envioSpan.textContent = `$${costoEnvio.toFixed(2)}`;
+  if (totalSpan) totalSpan.textContent = `$${totalFinal.toFixed(2)}`;
 }
 
-// SECCIÓN CÓDIGO MARCOS: Eliminar de a 1 unidad
+
+// ===============================================
+// SECCIÓN 5: ELIMINAR PRODUCTO
+// ===============================================
+
 function agregarEventosEliminar() {
   const botonesEliminar = document.querySelectorAll('.eliminar-btn');
 
@@ -123,25 +133,25 @@ function agregarEventosEliminar() {
       const producto = cartItems[index];
       if (!producto) return;
 
-      // 🔹 Si hay más de 1 unidad, resto una
+      // Si hay más de 1 unidad, resta una
       let cantidad = parseInt(producto.quantity) || 0;
       if (cantidad > 1) {
         producto.quantity = cantidad - 1;
       } else {
-        // 🔹 Si queda 1, saco el producto del carrito
         cartItems.splice(index, 1);
       }
 
-      // Guardamos el nuevo estado en localStorage
       localStorage.setItem('cartProducts', JSON.stringify(cartItems));
-
-      // Redibujamos carrito y resumen con los datos actualizados
       mostrarCarrito();
     });
   });
 }
 
-// SECCIÓN: Cambiar cantidad desde el input
+
+// ===============================================
+// SECCIÓN 6: CAMBIAR CANTIDAD DESDE INPUT
+// ===============================================
+
 function agregarEventosCantidad() {
   const inputs = document.querySelectorAll('.cart-item__cantidad-input');
 
@@ -165,39 +175,17 @@ function agregarEventosCantidad() {
 }
 
 
-// SECCIÓN 5: Actualizar el total en el resumen (span grande del costado)
-function actualizarTotal(total) {
-  const totalElemento = document.getElementById("cart-total");
-  if (totalElemento) {
-    totalElemento.textContent = `$${Number(total).toFixed(2)}`;
-  }
-
-  if (envioSpan) envioSpan.textContent = `$${envio.toFixed(2)}`;
-
-  const total = subtotal + envio;
-
-  if (totalSpan) totalSpan.textContent = `$${total.toFixed(2)}`;
-}
-
-
 // ===============================================
-// SECCIÓN 6: CAMBIO DE ENVÍO ACTUALIZA TOTALES
+// SECCIÓN 7: CAMBIO DE ENVÍO
 // ===============================================
 
 envioRadios.forEach(radio => {
-  radio.addEventListener("change", calcularTotales);
+  radio.addEventListener("change", actualizarTotales);
 });
 
 
 // ===============================================
-// INICIO
-// ===============================================
-
-mostrarCarrito();
-
-
-// ===============================================
-// VALIDACIONES + FINALIZAR COMPRA
+// SECCIÓN 8: FINALIZAR COMPRA
 // ===============================================
 
 finalizarBtn.addEventListener("click", () => {
@@ -234,7 +222,7 @@ finalizarBtn.addEventListener("click", () => {
 
 
 // ===============================================
-// MODAL DE VALIDACIÓN
+// SECCIÓN 9: MODAL DE VALIDACIÓN
 // ===============================================
 
 function mostrarMensaje(texto) {
@@ -249,11 +237,17 @@ function mostrarMensaje(texto) {
     modal.style.display = "none";
   };
 
-  // cerrar clic afuera
   modal.onclick = e => {
     if (e.target === modal) modal.style.display = "none";
   };
 }
+
+
+// ===============================================
+// INICIO
+// ===============================================
+
+mostrarCarrito();
 
 
 // cart-item tiene ahora 3 hijos principales:
