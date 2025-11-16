@@ -42,45 +42,52 @@ function mostrarCarrito() {
 
   cartContainer.innerHTML = "";
 
-  cartItems.forEach((producto, index) => {
-    const card = document.createElement("div");
-    card.classList.add("cart-item");
+  // Mostramos cada producto
+  cartItems.forEach((producto, index) => { 
+  const card = document.createElement("div");
+  card.classList.add("cart-item");
 
-    card.innerHTML = `
-      <div class="cart-item__image">
-        <img src="${producto.image}" alt="${producto.name}">
+  card.innerHTML = `
+    <!-- COLUMNA 1: IMAGEN -->
+    <div class="cart-item__image">
+      <img src="${producto.image}" alt="${producto.name}">
+    </div>
+
+    <!-- COLUMNA 2: TÍTULO -->
+    <div class="cart-item__main">
+      <h3 class="cart-item__title">${producto.name}</h3>
+    </div>
+    
+    <!-- COLUMNA 3: CANTIDAD + SUBTOTAL + ELIMINAR -->
+    <div class="cart-item__meta">
+      <div class="cart-item__qty d-flex align-items-center gap-2">
+        <strong>Cantidad:</strong>
+        <input
+          type="number"
+          min="1"
+          class="form-control form-control-sm cart-item__cantidad-input"
+          value="${producto.quantity}"
+          data-index="${index}"
+          style="width: 70px;"
+        >
       </div>
 
-      <div class="cart-item__main">
-        <h3 class="cart-item__title">${producto.name}</h3>
-      </div>
-      
-      <div class="cart-item__meta">
-        <span class="cart-item__qty"><strong>Cantidad:</strong> ${producto.quantity}</span>
-        <span class="cart-item__subtotal">
-          <strong>Subtotal:</strong> $${totalProducto(producto.price, producto.quantity)}
-        </span>
+      <span class="cart-item__subtotal">
+        <strong>Subtotal:</strong> $${totalProducto(producto.price, producto.quantity)}
+      </span>
 
-        <button class="btn btn-danger btn-sm btn-delete" data-index="${index}">
-          Eliminar
-        </button>
-      </div>
-    `;
+      <button class="btn btn-danger btn-sm eliminar-btn" data-index="${index}">
+        Eliminar
+      </button>
+    </div>
+  `;
 
-    cartContainer.appendChild(card);
-  });//Verifica si existe el contenedor, i el carrito está vacío: muestra mensaje y borra los totales, si tiene productos los muestra
+  cartContainer.appendChild(card);
+});
 
+    agregarEventosEliminar();
+    agregarEventosCantidad();
 
-
-  // Evento de eliminar
-  document.querySelectorAll(".btn-delete").forEach(btn => {
-    btn.addEventListener("click", e => {
-      const i = e.target.dataset.index;
-      cartItems.splice(i, 1);
-      localStorage.setItem("cartProducts", JSON.stringify(cartItems));
-      mostrarCarrito();
-    });
-  });
 
   calcularTotales();
 }
@@ -104,28 +111,65 @@ function calcularTotales() {
   actualizarResumenCarrito(subtotal);
 }
 
+// SECCIÓN CÓDIGO MARCOS: Eliminar de a 1 unidad
+function agregarEventosEliminar() {
+  const botonesEliminar = document.querySelectorAll('.eliminar-btn');
 
-// ===============================================
-// SECCIÓN 5: ACTUALIZAR RESUMEN (subtotal + envío + total)
-// ===============================================
+  botonesEliminar.forEach((boton) => {
+    boton.addEventListener('click', () => {
+      const index = parseInt(boton.dataset.index, 10);
+      if (isNaN(index)) return;
 
-function actualizarResumenCarrito(subtotal) {
-  const subtotalSpan = document.getElementById("resumen-subtotal");
-  const envioSpan = document.getElementById("resumen-envio");
-  const totalSpan = document.getElementById("cart-total");
+      const producto = cartItems[index];
+      if (!producto) return;
 
-  if (subtotalSpan) subtotalSpan.textContent = `$${subtotal.toFixed(2)}`;
+      // 🔹 Si hay más de 1 unidad, resto una
+      let cantidad = parseInt(producto.quantity) || 0;
+      if (cantidad > 1) {
+        producto.quantity = cantidad - 1;
+      } else {
+        // 🔹 Si queda 1, saco el producto del carrito
+        cartItems.splice(index, 1);
+      }
 
-  // Calcular envío
-  let envio = 0;
-  const seleccionado = document.querySelector('input[name="tipoEnvio"]:checked');
+      // Guardamos el nuevo estado en localStorage
+      localStorage.setItem('cartProducts', JSON.stringify(cartItems));
 
-  if (seleccionado) {
-    const tipo = seleccionado.value;
+      // Redibujamos carrito y resumen con los datos actualizados
+      mostrarCarrito();
+    });
+  });
+}
 
-    if (tipo === "premium") envio = subtotal * 0.15;
-    else if (tipo === "express") envio = subtotal * 0.07;
-    else if (tipo === "standard") envio = subtotal * 0.05;
+// SECCIÓN: Cambiar cantidad desde el input
+function agregarEventosCantidad() {
+  const inputs = document.querySelectorAll('.cart-item__cantidad-input');
+
+  inputs.forEach((input) => {
+    input.addEventListener('change', () => {
+      const index = parseInt(input.dataset.index, 10);
+      if (isNaN(index)) return;
+
+      let nuevaCantidad = parseInt(input.value, 10);
+      if (isNaN(nuevaCantidad) || nuevaCantidad < 1) {
+        nuevaCantidad = 1;
+      }
+
+      if (!cartItems[index]) return;
+      cartItems[index].quantity = nuevaCantidad;
+
+      localStorage.setItem('cartProducts', JSON.stringify(cartItems));
+      mostrarCarrito();
+    });
+  });
+}
+
+
+// SECCIÓN 5: Actualizar el total en el resumen (span grande del costado)
+function actualizarTotal(total) {
+  const totalElemento = document.getElementById("cart-total");
+  if (totalElemento) {
+    totalElemento.textContent = `$${Number(total).toFixed(2)}`;
   }
 
   if (envioSpan) envioSpan.textContent = `$${envio.toFixed(2)}`;
