@@ -9,32 +9,54 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <link rel="stylesheet" href="css/botonclarooscuro.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
-
+  <body>
+  <button id="boton-tema" aria-label="Cambiar tema"></button>
    <nav class="navbar navbar-expand-lg navbar-light" id="navbar1">
     <div class="container px-4 px-lg-5">
-      <a class="navbar-brand" href="#!">CompraFácilUY</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
-          class="navbar-toggler-icon"></span></button>
+      <a class="navbar-brand" href="index.html">CompraFácilUY</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- IZQUIERDA: links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-          <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="sell.html">Vender</a></li>
-            <li class="nav-item"><a class="nav-link" href="categories.html">Categorías</a></li>
-            <li class="nav-item">
-            <a class="nav-link" href="my-profile.html"><i class="bi bi-person-circle"></i> Mi perfil </a>
-           </li>
-      </ul>
-       <div class="d-flex align-items-center gap-3">
-        <span id="email" class="navbar-text fw-semibold text-primary"></span>
-      </div>  
-         <button id="boton-tema" aria-label="Cambiar tema"></button>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sell.html">Vender</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="products.html">Categorías</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="my-profile.html">
+              <i class="fa-regular fa-user"></i> Mi perfil
+            </a>
+          </li>
+        </ul>
+
+        <!-- DERECHA: CARRITO -->
+        <form class="d-flex">
+          <a href="cart.html">
+            <button class="btn btn-outline-dark" type="button">
+              <i class="fa-solid fa-cart-shopping"></i>
+              Carrito
+              <span id="cart-count" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+            </button>
+          </a>
+        </form>
       </div>
     </div>
-   </nav> 
+    </nav> 
     <main>
   <div class="jumbotron text-center"></div>
     <div class="album py-5 bg-light">
@@ -77,19 +99,26 @@
       </div>
     </div>
   </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
-    </div>
-  </footer>
+
+  <footer class="text-muted py-2 footer-jap">
+  <div class="container d-flex justify-content-between align-items-center">
+    <p class="mb-0 texto-footer">
+      Este sitio forma parte de
+      <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jóvenes a Programar</a>
+    </p>
+    <p class="mb-0">
+      <a href="#">Volver arriba</a>
+    </p>
+  </div>
+</footer>
+
+
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/index.js"></script>
   <script src="js/init.js"></script>
   <script src="js/verify.js"></script>
-  <script src="js/botonclarooscuro.js"></script> 
+  <script src="js/botonclarooscuro.js"></script>
+  <script src="js/badget.js"></script> 
 </body>
 
 </html>

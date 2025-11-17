@@ -10,12 +10,15 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <!-- Tus estilos personalizados (mismo diseño que products) -->
+  <link rel="stylesheet" href="css/estilo.css">
   <link rel="stylesheet" href="css/botonclarooscuro.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
   <button id="boton-tema" aria-label="Cambiar tema"></button>
+
   <nav class="navbar navbar-expand-lg navbar-light" id="navbar1">
     <div class="container px-4 px-lg-5">
       <a class="navbar-brand" href="index.html">CompraFácilUY</a>
@@ -35,25 +38,18 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item">
-            <!-- ACÁ MARCAMOS CATEGORÍAS COMO ACTIVO -->
-            <a class="nav-link active" aria-current="page" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <li class="nav-item"><a class="nav-link" href="my-profile.html">
-            <i class="bi bi-person-circle"></i> Mi perfil </a></li>
+            <a class="nav-link" href="my-profile.html">
+              <i class="fa-regular fa-user"></i> Mi perfil
             </a>
           </li>
         </ul>
 
-        <form class="d-flex">
-          <a href="cart.html">
-            <button class="btn btn-outline-dark" type="button">
-              <i class="fa-solid fa-cart-shopping"></i>
-              Carrito
-              <span id="cart-count" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-            </button>
-          </a>
-        </form>
+        <!-- Carrito -->
+        <a href="cart.html" class="btn btn-outline-dark d-flex align-items-center">
+          <i class="fa-solid fa-cart-shopping me-1"></i>
+          Carrito
+          <span id="cart-count" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+        </a>
       </div>
     </div>
   </nav>
@@ -72,10 +68,13 @@
             <input type="radio" class="btn-check" name="options" id="sortDesc">
             <label class="btn btn-light" for="sortDesc">Z-A</label>
             <input type="radio" class="btn-check" name="options" id="sortByCount" checked>
-            <label class="btn btn-light" for="sortByCount"><i class="fas fa-sort-amount-down mr-1"></i></label>
+            <label class="btn btn-light" for="sortByCount">
+              <i class="fas fa-sort-amount-down mr-1"></i>
+            </label>
           </div>
         </div>
       </div>
+
       <div class="row">
         <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
           <div class="row container p-0 m-0">
@@ -97,18 +96,24 @@
           </div>
         </div>
       </div>
+
       <div class="row">
         <div class="list-group" id="cat-list-container">
         </div>
       </div>
     </div>
   </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
+
+  <!-- FOOTER  -->
+  <footer class="text-muted py-2">
+    <div class="container d-flex justify-content-between align-items-center">
+      <p class="mb-0">
+        Este sitio forma parte de
+        <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jóvenes a Programar</a>
+      </p>
+      <p class="mb-0">
         <a href="#">Volver arriba</a>
       </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
     </div>
   </footer>
   <div id="spinner-wrapper">
@@ -119,6 +124,7 @@
       <div></div>
     </div>
   </div>
+
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/categories.js"></script>

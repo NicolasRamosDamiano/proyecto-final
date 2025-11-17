@@ -5,8 +5,10 @@ body {
 }
 
 /* === NAVBAR === */
-#navbar1 {
-  font-weight: 600;
+#navbar1 .navbar-brand,
+#navbar1 .nav-link,
+#navbar1 .btn {
+  font-weight: 400;
 }
 
 #navbar1 a.navbar-brand {
@@ -21,6 +23,18 @@ body {
 
 #navbar1 .nav-link:hover {
   color: #555 ;
+}
+
+/* Paginación justo encima del footer */
+nav[aria-label="Paginación de productos"] {
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+/* Footer pegado a la paginación, sin espacio extra */
+footer.text-muted {
+  margin-top: 0;
+  text-align: center;
 }
 
 /* === SECCIÓN PRINCIPAL === */
