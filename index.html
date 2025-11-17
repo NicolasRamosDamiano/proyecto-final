@@ -5,6 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>eMercado - Todo lo que busques está aquí</title>
+
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
@@ -13,9 +14,11 @@
 </head>
 
 <body>
-  <body>
+  <!-- Botón modo claro/oscuro -->
   <button id="boton-tema" aria-label="Cambiar tema"></button>
-   <nav class="navbar navbar-expand-lg navbar-light" id="navbar1">
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-light" id="navbar1">
     <div class="container px-4 px-lg-5">
       <a class="navbar-brand" href="index.html">CompraFácilUY</a>
 
@@ -29,13 +32,13 @@
         <!-- IZQUIERDA: links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
+            <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="products.html">Categorías</a>
+            <a class="nav-link" href="products.html">Categorías</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="my-profile.html">
@@ -44,21 +47,15 @@
           </li>
         </ul>
 
-        <!-- DERECHA: CARRITO -->
-        <form class="d-flex">
-          <a href="cart.html">
-            <button class="btn btn-outline-dark" type="button">
-              <i class="fa-solid fa-cart-shopping"></i>
-              Carrito
-              <span id="cart-count" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-            </button>
-          </a>
-        </form>
+        <!-- DERECHA: saludo + cerrar sesión (lo rellena verify.js) -->
+        <div id="email" class="d-flex align-items-center"></div>
       </div>
     </div>
-    </nav> 
-    <main>
-  <div class="jumbotron text-center"></div>
+  </nav>
+
+  <main>
+    <div class="jumbotron text-center"></div>
+
     <div class="album py-5 bg-light">
       <div class="container">
         <div class="row">
@@ -72,6 +69,7 @@
               </div>
             </div>
           </div>
+
           <div class="col-md-4">
             <div class="card mb-4 shadow-sm custom-card cursor-active" id="juguetes">
               <img class="bd-placeholder-img card-img-top" src="img/toys_index.jpg"
@@ -82,6 +80,7 @@
               </div>
             </div>
           </div>
+
           <div class="col-md-4">
             <div class="card mb-4 shadow-sm custom-card cursor-active" id="muebles">
               <img class="bd-placeholder-img card-img-top" src="img/furniture_index.jpg"
@@ -93,6 +92,7 @@
             </div>
           </div>
         </div>
+
         <div class="row">
           <a class="btn btn-light btn-lg btn-block" href="categories.html">Y mucho más!</a>
         </div>
@@ -101,24 +101,22 @@
   </main>
 
   <footer class="text-muted py-2 footer-jap">
-  <div class="container d-flex justify-content-between align-items-center">
-    <p class="mb-0 texto-footer">
-      Este sitio forma parte de
-      <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jóvenes a Programar</a>
-    </p>
-    <p class="mb-0">
-      <a href="#">Volver arriba</a>
-    </p>
-  </div>
-</footer>
-
+    <div class="container d-flex justify-content-between align-items-center">
+      <p class="mb-0 texto-footer">
+        Este sitio forma parte de
+        <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jóvenes a Programar</a>
+      </p>
+      <p class="mb-0">
+        <a href="#">Volver arriba</a>
+      </p>
+    </div>
+  </footer>
 
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/index.js"></script>
   <script src="js/init.js"></script>
   <script src="js/verify.js"></script>
   <script src="js/botonclarooscuro.js"></script>
-  <script src="js/badget.js"></script> 
+  <script src="js/badget.js"></script>
 </body>
-
 </html>
