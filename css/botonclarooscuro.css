@@ -188,3 +188,15 @@ html[data-tema="claro"] #boton-compra-finalizar:hover {
 html[data-tema="oscuro"] #boton-compra-finalizar:hover {
   filter: brightness(1.2);
 }
+
+/* ===== BOTÓN CARRITO EN MODO OSCURO (TODAS LAS PÁGINAS) ===== */
+html[data-tema="oscuro"] #navbar1 .btn-outline-dark {
+  color: #ffffff;
+  border-color: #ffffff;
+  background-color: transparent;
+}
+
+html[data-tema="oscuro"] #navbar1 .btn-outline-dark:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
