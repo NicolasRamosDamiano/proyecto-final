@@ -13,8 +13,8 @@ const productThumbs = document.getElementById("product-thumbs");
 const containerRecomendados = document.getElementById("containerRecomendados");
 
 // URLs de la API
-const URL_PRODUCT = `https://japceibal.github.io/emercado-api/products/${productId}.json`;
-const URL_COMMENTS = `https://japceibal.github.io/emercado-api/products_comments/${productId}.json`;
+const URL_PRODUCT = `http://localhost:3000/products/${productId}.json`;
+const URL_COMMENTS = `http://localhost:3000/products_comments/${productId}.json`;
 
 // === Renderizar estrellas ===
 function renderStars(score) {
@@ -131,6 +131,8 @@ document.getElementById("btnComentar").addEventListener("click", () => {
 
   document.getElementById("nuevoComentario").value = "";
   document.getElementById("puntuacion").value = "5";
+   
+
 });
 
 // === Redirigir a producto relacionado ===
@@ -180,3 +182,12 @@ const productId = localStorage.getItem("productID");
 
 
 
+  function mostrarMensajeExito() {
+            const mensaje = document.getElementById('mensajeExito');
+            mensaje.style.display = 'block';
+            
+            
+            setTimeout(() => {
+                mensaje.style.display = 'none';
+            }, 5000);
+        }
