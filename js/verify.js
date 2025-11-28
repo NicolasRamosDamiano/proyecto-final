@@ -1,15 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
   const emailDiv = document.getElementById("email");
-  const userEmail = localStorage.getItem("userEmail");
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
 
-  // Si NO está logueado -> siempre redirigir a login
-  if (isLoggedIn !== "true" || !userEmail) {
+  // TOKEN NUEVO DEL LOGIN REAL
+  const token = localStorage.getItem("token");
+  const userEmail = localStorage.getItem("userEmail");
+
+  // Si NO hay token → no está logueado → redirigir siempre
+  if (!token || !userEmail) {
     window.location.href = "login.html";
     return;
-  }
+  } 
 
-  // Si está logueado y hay contenedor #email -> mostrar saludo
+  // Si está logueado → mostrar saludo si existe el div
   if (emailDiv) {
     const nombreUsuario = userEmail.split("@")[0];
 
@@ -21,15 +23,14 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
 
     const logoutBtn = document.getElementById("logout");
-    if (logoutBtn) {
-      logoutBtn.addEventListener("click", () => {
-        localStorage.removeItem("isLoggedIn");
-        localStorage.removeItem("userEmail");
-        window.location.href = "login.html";
-      });
-    }
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("token");
+      localStorage.removeItem("userEmail");
+      window.location.href = "login.html";
+    });
   }
 });
+
 
 
 
