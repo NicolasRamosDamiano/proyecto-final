@@ -1,17 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
   const emailDiv = document.getElementById("email");
-
-  // TOKEN NUEVO DEL LOGIN REAL
-  const token = localStorage.getItem("token");
   const userEmail = localStorage.getItem("userEmail");
+  const token = localStorage.getItem("token"); // usar token
 
-  // Si NO hay token → no está logueado → redirigir siempre
+  // Si NO hay token o email -> redirigir a login
   if (!token || !userEmail) {
     window.location.href = "login.html";
     return;
-  } 
+  }
 
-  // Si está logueado → mostrar saludo si existe el div
+  // Si hay token y contenedor -> mostrar saludo
   if (emailDiv) {
     const nombreUsuario = userEmail.split("@")[0];
 
@@ -23,37 +21,16 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
 
     const logoutBtn = document.getElementById("logout");
-    logoutBtn.addEventListener("click", () => {
-      localStorage.removeItem("token");
-      localStorage.removeItem("userEmail");
-      window.location.href = "login.html";
-    });
-  }
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("userEmail");
+        window.location.href = "login.html";
+      });
+    }
+  }
 });
 
 
 
 
-// CÓDIGO ANTERIOR 
-// document.addEventListener("DOMContentLoaded", () => {
-//  const emailDiv = document.getElementById("email");
-// const userEmail = localStorage.getItem("userEmail");
-//  const isLoggedIn = localStorage.getItem("isLoggedIn");
-
-//  if (isLoggedIn === "true" && userEmail) {
-//    const nombreUsuario = userEmail.split("@")[0];
-
-//    emailDiv.innerHTML = `
-//      Hola, <strong>${nombreUsuario}</strong> 
-//      <button id="logout" class="btn btn-sm btn-outline-danger ms-2">Cerrar sesión</button>
-//    `;
-
-//    document.getElementById("logout").addEventListener("click", () => {
-//      localStorage.removeItem("isLoggedIn");
-//     localStorage.removeItem("userEmail");
-//      window.location.href = "login.html";
-//    });
-//  } else {
-//    window.location.href = "login.html";
- // }
-//});
