@@ -1,6 +1,6 @@
 const categoriaId = localStorage.getItem("catID");
 const contenedor = document.getElementById("productos");
-const url = `https://japceibal.github.io/emercado-api/cats_products/${categoriaId}.json`;
+const url = `http://localhost:3000/cats_products/${categoriaId}.json`;
 
 
 // Guardamos los productos para poder filtrar/buscar
