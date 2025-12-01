@@ -27,6 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.removeItem("userEmail");
         window.location.href = "login.html";
       });
-    }
-  }
+    }
+  }
 });

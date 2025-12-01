@@ -26,6 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = 'index.html';
         } catch (err) {
             alert(err.message);
-        }
-    });
+        }
+    });
 });
